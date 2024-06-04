@@ -2,13 +2,13 @@
 
 ![16576143293033_top autos-02](https://github.com/Mil00Z/bonnes-pieces/assets/26485097/e6d9f078-c914-4887-964e-14d9d27cfce5)
 
+
 👉 https://mil00z.github.io/bonnes-pieces/
 
 
-
-Code base du fil rouge pour le cours OpenClassrooms [Créez des pages web dynamiques avec JavaScript](https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript)
-
 ## Installation
+
+📌 Code base du fil rouge pour le cours OpenClassrooms [Créez des pages web dynamiques avec JavaScript](https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript)
 
 Après avoir cloné le repo vous avez plusieurs options pour lancer le projet. 
 
