@@ -1,10 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+:root{
+
+	--main-color:#7451eb;
+	--white-color:#FFF;
+	--black-color:#000;
+	--grey-color:#808080;
+	--body-font:'Montserrat', sans-serif;
+	--skeleton:1200px;
+	--radius:4px;
+
+	--filter-shadow:0px 0px 4px gray
+}
 
 body {
-	max-width: 1200px;
+	max-width: var(--skeleton);
 	margin: auto;
 	padding: 16px;
-	font-family: 'Montserrat', sans-serif;
+	font-family: var(--body-font);
 }
 
 header {
@@ -13,14 +24,17 @@ header {
 	align-items: center;
 	margin-bottom: 16px;
 	padding: 8px;
-	background-color: #7451eb;
+	background-color: var(--main-color);
 	text-align: center;
-	color: white;
+	color: var(--white-color);
+	border-radius: var(--radius);
 }
+
 header img {
-	height: 60px;
+	height: 90px;
 	margin-left: 1rem;
 }
+
 header h1 {
 	flex-grow: 1;
 }
@@ -31,14 +45,19 @@ main {
 }
 
 .filtres {
-	border-radius: 4px;
-	box-shadow: 0px 0px 4px gray;
+	display: flex;
+	flex-direction: column;
+	min-width: 25%;
+	min-height: 400px;
+	border-radius: var(--radius);
+	box-shadow: var(--filter-shadow);
 	margin: 8px;
 	padding: 8px;
-	min-width: 300px;
-	min-height: 400px;
 }
+
 .filtres h3 {
+	color:var(--main-color);
+	font-weight: bold;
 	text-align: center;
 }
 
@@ -46,10 +65,11 @@ main {
 	flex: 1;
 	margin: 8px;
 }
+
 .fiches img {
 	max-width: 200px;
 }
+
 .fiches p {
-	margin-top: 4px;
-	margin-bottom: 4px;
+	margin-block:4px;
 }
