@@ -33,25 +33,25 @@ getProductsDatas.then(resolve => resolve.json())
                 dataSet[data].disponibilite = 'non';
             }
 
-        
+            dataWrapper.classList.add('product');
             dataWrapper.setAttribute('data-id',`${dataSet[data].id}`);
            
             dataName.textContent = `${dataSet[data].nom}`;
-            dataPrice.textContent = `${dataSet[data].prix} euros`;
+            dataPrice.textContent = `Prix : ${dataSet[data].prix} $`;
             dataImg.setAttribute('src',`${dataSet[data].image}`);
             dataDesc.textContent = `${dataSet[data].description}`;
-            dataDispo.textContent = `Dispo: ${dataSet[data].disponibilite}`;
+            dataDispo.textContent = `Disponible: ${dataSet[data].disponibilite}`;
 
-            dataWrapper.classList.add('datas');
+            
 
             // Push Datas one by One
             dataWrapper.append(dataName,dataDesc,dataDispo,dataPrice,dataImg);
 
             //Push Global Datas
-            document.querySelector('.filtres').append(dataWrapper);
+            document.querySelector('.fiches').append(dataWrapper);
 
             // Print Console Datas
-            console.table(`${values} : ${dataSet[data][values]}`);
+            // console.table(`${values} : ${dataSet[data][values]}`);
 
         }
 
