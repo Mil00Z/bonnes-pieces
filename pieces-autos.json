@@ -31,7 +31,7 @@
         "nom": "Liquide de frein",
         "prix": 9.60,
         "categorie": "Freinage",
-        "description":"",
+        "description":null,
         "disponibilite":true,
         "image":"../assets/images/liquide-frein.png"
     },
@@ -41,6 +41,6 @@
         "prix": 29.10,
         "description":"Performances d’essuyage au top ! Longueur : 550 mm.",
         "disponibilite":true,
-        "image":"../assets/images/balais-essui-glace.png"
+        "image":"../assets/images/balai-essuie-glace.png"
     }
 ]

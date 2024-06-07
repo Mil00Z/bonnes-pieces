@@ -1,14 +1,24 @@
-const productsFile = '../../pieces-autos.json';
+const productsFile = "../../pieces-autos.json";
 
-const getProductsDatas = fetch(productsFile);
-getProductsDatas.then(resolve => resolve.json())
-.then(
-    (dataSet) => {
+const fetchDatas = await fetch(productsFile);
+const dataSet = await fetchDatas.json();
 
-    //Afficher premiere infos du jeux
-    console.log(dataSet);
 
-    for (const data in dataSet) {
+    getProductDatas(dataSet);
+
+   
+
+
+
+// FUNCTIONS
+// Get Set Display Datas Products
+async function getProductDatas(dataElement) {
+
+    //Display in Console datas
+    console.log(dataElement);
+    // console.log(dataSet[0]);
+
+    for (const data in dataElement) {
 
         let dataWrapper = document.createElement('article');
         let dataName = document.createElement('h2');
@@ -16,45 +26,72 @@ getProductsDatas.then(resolve => resolve.json())
         let dataPrice = document.createElement('span');
         let dataDesc = document.createElement('p');
         let dataDispo = document.createElement('div');
-
-
+        let dataCat = document.createElement('span');
+    
         //Afficher les infos des objects dans le tableau retour de données
-        for (let values in dataSet[data]) {
+
+        const objectData = dataElement[data];
+
+        for (let values in objectData) {
 
             
-            if (dataSet[data].disponibilite) {
+            // if (objectData.disponibilite === true) {
 
-                dataSet[data].disponibilite = 'oui';
-                
-            }
+            //     objectData.disponibilite = 'oui';
 
-            else {
+            // } else {
+            //     objectData.disponibilite = 'non';
+            // }
 
-                dataSet[data].disponibilite = 'non';
-            }
+            // Set Datas
+            dataWrapper.classList.add('product');
+            dataWrapper.setAttribute('data-id',`${objectData.id}`);
 
-        
-            dataWrapper.setAttribute('data-id',`${dataSet[data].id}`);
-           
-            dataName.textContent = `${dataSet[data].nom}`;
-            dataPrice.textContent = `${dataSet[data].prix} euros`;
-            dataImg.setAttribute('src',`${dataSet[data].image}`);
-            dataDesc.textContent = `${dataSet[data].description}`;
-            dataDispo.textContent = `Dispo: ${dataSet[data].disponibilite}`;
+            dataName.classList.add('product_name');
+            dataName.textContent = `${objectData.nom}`;
+            
 
-            dataWrapper.classList.add('datas');
+            dataPrice.classList.add('product_price');
+            dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
-            // Push Datas one by One
-            dataWrapper.append(dataName,dataDesc,dataDispo,dataPrice,dataImg);
+            dataImg.classList.add('product_img');
+            dataImg.setAttribute('src',`${objectData.image}`);
+
+            dataDesc.classList.add('product_desc');
+            dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
+
+            dataDispo.classList.add('product_avail');
+            dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
+            dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
+
+            dataCat.classList.add('product_cat');
+            dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
+
+            
+            // Push Datas in DOM
+            dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
             //Push Global Datas
-            document.querySelector('.filtres').append(dataWrapper);
+            document.querySelector('.fiches').append(dataWrapper);
 
             // Print Console Datas
-            console.table(`${values} : ${dataSet[data][values]}`);
+            // console.table(`${values} : ${dataSet[data][values]}`);
 
         }
 
     }
-        
-});
+
+}
+
+// Funny Display of Datas on DOM
+function eventDisplayDatas(eventName, targetEvent) {
+
+    document.querySelector(`${targetEvent}`).addEventListener(`${eventName}`,(e) =>{
+
+        getProductDatas(dataSet);
+    
+    }, {once:true});
+
+}
+
+
