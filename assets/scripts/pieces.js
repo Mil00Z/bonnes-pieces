@@ -7,6 +7,7 @@ getProductsDatas.then(resolve => resolve.json())
 
     //Afficher premiere infos du jeux
     console.log(dataSet);
+    console.log(dataSet[0]);
 
     for (const data in dataSet) {
 
@@ -16,13 +17,12 @@ getProductsDatas.then(resolve => resolve.json())
         let dataPrice = document.createElement('span');
         let dataDesc = document.createElement('p');
         let dataDispo = document.createElement('div');
-
-
+    
         //Afficher les infos des objects dans le tableau retour de données
         for (let values in dataSet[data]) {
 
             
-            if (dataSet[data].disponibilite) {
+            if (dataSet[data].disponibilite === true) {
 
                 dataSet[data].disponibilite = 'oui';
                 
@@ -33,11 +33,13 @@ getProductsDatas.then(resolve => resolve.json())
                 dataSet[data].disponibilite = 'non';
             }
 
+
+
             dataWrapper.classList.add('product');
             dataWrapper.setAttribute('data-id',`${dataSet[data].id}`);
            
             dataName.textContent = `${dataSet[data].nom}`;
-            dataPrice.textContent = `Prix : ${dataSet[data].prix} $`;
+            dataPrice.textContent = `Prix: ${dataSet[data].prix} ${dataSet[data] < 35 ? "$" : "$$$"}`;
             dataImg.setAttribute('src',`${dataSet[data].image}`);
             dataDesc.textContent = `${dataSet[data].description}`;
             dataDispo.textContent = `Disponible: ${dataSet[data].disponibilite}`;
@@ -45,7 +47,7 @@ getProductsDatas.then(resolve => resolve.json())
             
 
             // Push Datas one by One
-            dataWrapper.append(dataName,dataDesc,dataDispo,dataPrice,dataImg);
+            dataWrapper.append(dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
             //Push Global Datas
             document.querySelector('.fiches').append(dataWrapper);
