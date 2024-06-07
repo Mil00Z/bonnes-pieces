@@ -1,15 +1,24 @@
-const productsFile = '../../pieces-autos.json';
+const productsFile = "../../pieces-autos.json";
 
-const getProductsDatas = fetch(productsFile);
-getProductsDatas.then(resolve => resolve.json())
-.then(
-    (dataSet) => {
+const fetchDatas = await fetch(productsFile);
+const dataSet = await fetchDatas.json();
+
+
+    getProductDatas(dataSet);
+
+   
+
+
+    
+// FUNCTIONS
+// Get Set Display Datas Products
+async function getProductDatas(dataElement) {
 
     //Display in Console datas
-    // console.log(dataSet);
-    console.log(dataSet[0]);
+    console.log(dataElement);
+    // console.log(dataSet[0]);
 
-    for (const data in dataSet) {
+    for (const data in dataElement) {
 
         let dataWrapper = document.createElement('article');
         let dataName = document.createElement('h2');
@@ -20,18 +29,18 @@ getProductsDatas.then(resolve => resolve.json())
         let dataCat = document.createElement('span');
     
         //Afficher les infos des objects dans le tableau retour de données
-        for (let values in dataSet[data]) {
+        for (let values in dataElement[data]) {
 
             
-            if (dataSet[data].disponibilite === true) {
+            if (dataElement[data].disponibilite === true) {
 
-                dataSet[data].disponibilite = 'oui';
+                dataElement[data].disponibilite = 'oui';
                 
             }
 
             else {
 
-                dataSet[data].disponibilite = 'non';
+                dataElement[data].disponibilite = 'non';
             }
 
 
@@ -71,5 +80,18 @@ getProductsDatas.then(resolve => resolve.json())
         }
 
     }
-        
-});
+
+}
+
+// Funny Display of Datas on DOM
+function eventDisplayDatas(eventName, targetEvent) {
+
+    document.querySelector(`${targetEvent}`).addEventListener(`${eventName}`,(e) =>{
+
+        getProductDatas(dataSet);
+    
+    }, {once:true});
+
+}
+
+
