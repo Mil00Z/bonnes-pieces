@@ -78,6 +78,7 @@ header h1 {
 /* Datas Fetched Object */
 .product {
 	--gap:1rem;
+	--paddingCard:.7rem;
 	display:flex;
 	flex-direction:column;
 	width: 45%;
@@ -91,32 +92,44 @@ header h1 {
 
 }
 
-.product > h2 {
+.product_name {
 	
 }
 
-.product > div {
+.product_avail {
 	color:var(--product-available);
 }
 
-.product > span {
+.product_price {
 	
 }
 
-.product > p {
+.product_desc {
 	
 }
 
-.product > h2,
-.product > p {
+.product_name,
+.product_desc {
 	margin-block:0;
 }
 
-.product > img {
+.product_img {
 	max-width: 25%;
 	object-fit: cover;
 	align-self: end;
 	
+}
+
+
+.product_cat {
+	--shadow-color:var(--black-color);
+	width:fit-content;
+	color:var(--black-color);
+	padding:.5rem;
+	background:var(--white-color);
+	/* border-radius: calc( (-1) * var(--paddingCard) + var(--radius)); */
+	border-radius: 2px;
+	box-shadow: var(--filter-shadow);
 }
 
 .product:hover {
