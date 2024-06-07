@@ -17,7 +17,6 @@
 
 body {
 	--layout:'desk';
-	max-width: var(--skeleton);
 	padding: 16px;
 	font-family: var(--body-font);
 	box-sizing: border-box;
@@ -49,7 +48,7 @@ header h1 {
 	--gap-common:.9rem;
 	display:flex;
 	column-gap:var(--gap-common);
-
+	max-width: var(--skeleton);
 }
 
 
