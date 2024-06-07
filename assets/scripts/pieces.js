@@ -9,7 +9,7 @@ const dataSet = await fetchDatas.json();
    
 
 
-    
+
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -29,43 +29,43 @@ async function getProductDatas(dataElement) {
         let dataCat = document.createElement('span');
     
         //Afficher les infos des objects dans le tableau retour de données
-        for (let values in dataElement[data]) {
+
+        const objectData = dataElement[data];
+
+        for (let values in objectData) {
 
             
-            if (dataElement[data].disponibilite === true) {
+            // if (objectData.disponibilite === true) {
 
-                dataElement[data].disponibilite = 'oui';
-                
-            }
+            //     objectData.disponibilite = 'oui';
 
-            else {
-
-                dataElement[data].disponibilite = 'non';
-            }
-
+            // } else {
+            //     objectData.disponibilite = 'non';
+            // }
 
             // Set Datas
             dataWrapper.classList.add('product');
-            dataWrapper.setAttribute('data-id',`${dataSet[data].id}`);
+            dataWrapper.setAttribute('data-id',`${objectData.id}`);
 
             dataName.classList.add('product_name');
-            dataName.textContent = `${dataSet[data].nom}`;
+            dataName.textContent = `${objectData.nom}`;
             
 
             dataPrice.classList.add('product_price');
-            dataPrice.textContent = `Prix: ${dataSet[data].prix} ${dataSet[data] < 35 ? "$" : "$$$"}`;
+            dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
             dataImg.classList.add('product_img');
-            dataImg.setAttribute('src',`${dataSet[data].image}`);
+            dataImg.setAttribute('src',`${objectData.image}`);
 
             dataDesc.classList.add('product_desc');
-            dataDesc.textContent = `${dataSet[data].description}`;
+            dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
 
             dataDispo.classList.add('product_avail');
-            dataDispo.textContent = `Disponible: ${dataSet[data].disponibilite}`;
+            dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
+            dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
 
             dataCat.classList.add('product_cat');
-            dataCat.textContent = `${dataSet[data].categorie}`;
+            dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
             
             // Push Datas in DOM
