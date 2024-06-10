@@ -16,7 +16,18 @@ const dataSet = await fetchDatas.json();
       });
 
 
-     
+      //Filtered BY Price
+      const filteredUnderPrice = document.querySelector('.btn-filter-product');
+
+      filteredUnderPrice.addEventListener('click',(e) =>{
+
+        filteredPrice(dataSet);
+
+      });
+
+
+
+
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -105,9 +116,22 @@ function filterPrice(dataElement){
 
     });
 
-    console.log('initial Data =>', dataElement);
+    // console.log('initial Data =>', dataElement);
     console.log('Ordered Data =>', copyOfdataElement);
-
-    // getProductDatas(copyOfdataElement);
 }
+
+function filteredPrice(dataElement) {
+
+
+    let dataFiltered = dataElement.filter((data) => {
+
+        return data.prix <= 35;
+
+    });
+
+    // console.log('initial Data =>', dataElement);
+    console.log(dataFiltered);
+}
+
+
 
