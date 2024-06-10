@@ -39,27 +39,28 @@ const dataSet = await fetchDatas.json();
 
 
       // Filtered BY Desc
-
       const filteredByDesc = document.querySelector('.btn-get-desc');
 
       filteredByDesc.addEventListener('click',(e) => {
 
-            let dataDescFiltered = dataSet.filter((data) =>{
 
-                return data.description;
+        filteredDesc(dataSet);
 
-            });
+      },{once:true});
 
-            console.log(dataDescFiltered);
 
-      });
+      // Filtered BY Stock
+
+      const filteredByStock = document.querySelector('.btn-get-stock');
+
+      filteredByStock.addEventListener('click',(e) =>{
+
+        filteredStock(dataSet);
+
+      },{once:true});
 
 
     
-
-
-
-
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -180,6 +181,31 @@ function filteredPrice(dataElement) {
     console.log('Filtered Data Price =>', dataFiltered);
 }
 
+
+function filteredDesc(dataElement){
+
+    let dataDescFiltered = dataElement.filter((data) =>{
+
+        return data.description;
+
+    });
+
+    console.log('Filtered Data Desc =>',dataDescFiltered);
+
+}
+
+
+function filteredStock(dataElement){
+
+    let dataStockFiltered = dataElement.filter((data) => {
+
+        return data.disponibilite;
+
+    });
+
+    console.log('Filtered Data Stock =>',dataStockFiltered);
+
+}
 
 
 
