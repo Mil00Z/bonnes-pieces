@@ -38,6 +38,26 @@ const dataSet = await fetchDatas.json();
       },{once:true});
 
 
+      // Filtered BY Desc
+
+      const filteredByDesc = document.querySelector('.btn-get-desc');
+
+      filteredByDesc.addEventListener('click',(e) => {
+
+            let dataDescFiltered = dataSet.filter((data) =>{
+
+                return data.description;
+
+            });
+
+            console.log(dataDescFiltered);
+
+      });
+
+
+    
+
+
 
 
 // FUNCTIONS
@@ -159,6 +179,9 @@ function filteredPrice(dataElement) {
     // console.log('initial Data =>', dataElement);
     console.log('Filtered Data Price =>', dataFiltered);
 }
+
+
+
 
 
 

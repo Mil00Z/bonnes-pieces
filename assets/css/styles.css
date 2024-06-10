@@ -16,6 +16,9 @@
 	--border-color:var(--black-color);
 	--border-width:2.5px;
 	--border-style-componant:var(--border-width) solid var(--border-color);
+	--linear-color-1:var(--product-available);
+	--linear-color-2:var(--product-categorie);
+	--linear-gradient: linear-gradient(to left,var(--linear-color-1) 0%, var(--linear-color-2) 100%);
 }
 
 body {
