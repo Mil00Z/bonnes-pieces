@@ -17,6 +17,17 @@ const dataSet = await fetchDatas.json();
       },{once:true});
 
 
+
+      //Desordered BY Price
+      const desorderedByPrice = document.querySelector('.btn-desorder-price');
+
+      desorderedByPrice.addEventListener('click',(e)=> {
+
+        desorderedPrice(dataSet);
+
+      },{once:true});
+
+
       //Filtered BY Price
       const filteredUnderPrice = document.querySelector('.btn-filter-price');
 
@@ -119,6 +130,21 @@ function orderedPrice(dataElement){
 
     // console.log('initial Data =>', dataElement);
     console.log('Ordered Data Price =>', copyOfdataElement);
+}
+
+function desorderedPrice(dataElement){
+
+    let copyOfdataElement = Array.from(dataElement);
+
+    copyOfdataElement.sort((a,b) => {
+        
+        //  Have to check how create an sub function of this with integration of prop (price) of Data
+        return b.prix - a.prix ;
+
+    });
+
+    // console.log('initial Data =>', dataElement);
+    console.log('Desordered Data Price =>', copyOfdataElement);
 }
 
 function filteredPrice(dataElement) {
