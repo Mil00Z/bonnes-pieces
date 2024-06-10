@@ -5,10 +5,10 @@ const dataSet = await fetchDatas.json();
 
     
     getProductDatas(dataSet);
-    
+
 
     //Ordered BY Price
-      const orderedByPrice = document.querySelector('.btn-filter-price');
+      const orderedByPrice = document.querySelector('.btn-order-price');
 
       orderedByPrice.addEventListener('click',(e)=> {
 
@@ -18,7 +18,7 @@ const dataSet = await fetchDatas.json();
 
 
       //Filtered BY Price
-      const filteredUnderPrice = document.querySelector('.btn-filter-product');
+      const filteredUnderPrice = document.querySelector('.btn-filter-price');
 
       filteredUnderPrice.addEventListener('click',(e) =>{
 
@@ -118,7 +118,7 @@ function orderedPrice(dataElement){
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log('Ordered Data =>', copyOfdataElement);
+    console.log('Ordered Data Price =>', copyOfdataElement);
 }
 
 function filteredPrice(dataElement) {
@@ -131,7 +131,7 @@ function filteredPrice(dataElement) {
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log('Filtered Data =>', dataFiltered);
+    console.log('Filtered Data Price =>', dataFiltered);
 }
 
 
