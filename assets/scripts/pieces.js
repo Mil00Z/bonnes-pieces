@@ -6,7 +6,57 @@ const dataSet = await fetchDatas.json();
     
     getProductDatas(dataSet);
 
-   
+
+    //Ordered BY Price
+      const orderedByPrice = document.querySelector('.btn-order-price');
+
+      orderedByPrice.addEventListener('click',(e)=> {
+
+        orderedPrice(dataSet);
+
+      },{once:true});
+
+
+
+      //Desordered BY Price
+      const desorderedByPrice = document.querySelector('.btn-desorder-price');
+
+      desorderedByPrice.addEventListener('click',(e)=> {
+
+        desorderedPrice(dataSet);
+
+      },{once:true});
+
+
+      //Filtered BY Price
+      const filteredUnderPrice = document.querySelector('.btn-filter-price');
+
+      filteredUnderPrice.addEventListener('click',(e) =>{
+
+        filteredPrice(dataSet);
+
+      },{once:true});
+
+
+      // Filtered BY Desc
+
+      const filteredByDesc = document.querySelector('.btn-get-desc');
+
+      filteredByDesc.addEventListener('click',(e) => {
+
+            let dataDescFiltered = dataSet.filter((data) =>{
+
+                return data.description;
+
+            });
+
+            console.log(dataDescFiltered);
+
+      });
+
+
+    
+
 
 
 
@@ -15,8 +65,7 @@ const dataSet = await fetchDatas.json();
 async function getProductDatas(dataElement) {
 
     //Display in Console datas
-    console.log(dataElement);
-    // console.log(dataSet[0]);
+    // console.log(dataElement);
 
     for (const data in dataElement) {
 
@@ -29,59 +78,51 @@ async function getProductDatas(dataElement) {
         let dataCat = document.createElement('span');
     
         //Afficher les infos des objects dans le tableau retour de données
-
         const objectData = dataElement[data];
 
-        for (let values in objectData) {
+        //Display in Console each Data
+        // console.log(objectData);
+    
+        // Set Datas
+        dataWrapper.classList.add('product');
+        dataWrapper.setAttribute('data-id',`${objectData.id}`);
 
-            
-            // if (objectData.disponibilite === true) {
+        dataName.classList.add('product_name');
+        dataName.textContent = `${objectData.nom}`;
+        
 
-            //     objectData.disponibilite = 'oui';
+        dataPrice.classList.add('product_price');
+        dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
-            // } else {
-            //     objectData.disponibilite = 'non';
-            // }
+        dataImg.classList.add('product_img');
+        dataImg.setAttribute('src',`${objectData.image}`);
 
-            // Set Datas
-            dataWrapper.classList.add('product');
-            dataWrapper.setAttribute('data-id',`${objectData.id}`);
+        dataDesc.classList.add('product_desc');
+        dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
 
-            dataName.classList.add('product_name');
-            dataName.textContent = `${objectData.nom}`;
-            
+        dataDispo.classList.add('product_avail');
+        dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
+        dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
 
-            dataPrice.classList.add('product_price');
-            dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
+        dataCat.classList.add('product_cat');
+        dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
-            dataImg.classList.add('product_img');
-            dataImg.setAttribute('src',`${objectData.image}`);
+        
+        // Push Datas in DOM
+        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
-            dataDesc.classList.add('product_desc');
-            dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
+        //Push Global Datas
+        document.querySelector('.fiches').append(dataWrapper);
 
-            dataDispo.classList.add('product_avail');
-            dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
-            dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
+        // Print Console Datas
+        // console.table(`${values} : ${dataSet[data][values]}`);
 
-            dataCat.classList.add('product_cat');
-            dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
-
-            
-            // Push Datas in DOM
-            dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
-
-            //Push Global Datas
-            document.querySelector('.fiches').append(dataWrapper);
-
-            // Print Console Datas
-            // console.table(`${values} : ${dataSet[data][values]}`);
-
-        }
 
     }
 
 }
+
+  
 
 // Funny Display of Datas on DOM
 function eventDisplayDatas(eventName, targetEvent,datas) {
@@ -93,5 +134,54 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
     }, {once:true});
 
 }
+
+
+
+function orderedPrice(dataElement){
+
+    let copyOfdataElement = Array.from(dataElement);
+
+    copyOfdataElement.sort((a,b) => {
+        
+        //  Have to check how create an sub function of this with integration of prop (price) of Data
+        return a.prix - b.prix ;
+
+    });
+
+    // console.log('initial Data =>', dataElement);
+    console.log('Ordered Data Price =>', copyOfdataElement);
+}
+
+function desorderedPrice(dataElement){
+
+    let copyOfdataElement = Array.from(dataElement);
+
+    copyOfdataElement.sort((a,b) => {
+        
+        //  Have to check how create an sub function of this with integration of prop (price) of Data
+        return b.prix - a.prix ;
+
+    });
+
+    // console.log('initial Data =>', dataElement);
+    console.log('Desordered Data Price =>', copyOfdataElement);
+}
+
+function filteredPrice(dataElement) {
+
+
+    let dataFiltered = dataElement.filter((data) => {
+
+        return data.prix <= 35;
+
+    });
+
+    // console.log('initial Data =>', dataElement);
+    console.log('Filtered Data Price =>', dataFiltered);
+}
+
+
+
+
 
 
