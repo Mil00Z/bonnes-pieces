@@ -13,7 +13,9 @@
 	--product-available:#34f50d;
 	--product-unavailable:#000000;
 	--filter-shadow:2px 2px 4px var(--shadow-color);
-	--border-style-componant:2px solid var(--black-color);
+	--border-color:var(--black-color);
+	--border-width:2.5px;
+	--border-style-componant:var(--border-width) solid var(--border-color);
 }
 
 body {
@@ -34,6 +36,7 @@ header {
 	color: var(--white-color);
 	background-color: var(--main-color);
 	border-radius: var(--radius);
+	border: var(--border-style-componant);
 }
 
 header img {
@@ -62,7 +65,7 @@ header h1 {
 	/* margin: 8px; */
 	padding: 8px;
 	row-gap:var(--gap-common);
-	/* border:.5px solid var(--black-color); */
+	border: var(--border-style-componant);
 	border-radius: var(--radius);
 	background-color:var(--white-color);
 	box-shadow: var(--filter-shadow);
