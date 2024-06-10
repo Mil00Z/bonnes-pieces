@@ -15,8 +15,7 @@ const dataSet = await fetchDatas.json();
 async function getProductDatas(dataElement) {
 
     //Display in Console datas
-    console.log(dataElement);
-    // console.log(dataSet[0]);
+    // console.log(dataElement);
 
     for (const data in dataElement) {
 
@@ -29,55 +28,45 @@ async function getProductDatas(dataElement) {
         let dataCat = document.createElement('span');
     
         //Afficher les infos des objects dans le tableau retour de données
-
         const objectData = dataElement[data];
 
-        for (let values in objectData) {
+        //Display in Console each Data
+        // console.log(objectData);
+    
+        // Set Datas
+        dataWrapper.classList.add('product');
+        dataWrapper.setAttribute('data-id',`${objectData.id}`);
 
-            
-            // if (objectData.disponibilite === true) {
+        dataName.classList.add('product_name');
+        dataName.textContent = `${objectData.nom}`;
+        
 
-            //     objectData.disponibilite = 'oui';
+        dataPrice.classList.add('product_price');
+        dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
-            // } else {
-            //     objectData.disponibilite = 'non';
-            // }
+        dataImg.classList.add('product_img');
+        dataImg.setAttribute('src',`${objectData.image}`);
 
-            // Set Datas
-            dataWrapper.classList.add('product');
-            dataWrapper.setAttribute('data-id',`${objectData.id}`);
+        dataDesc.classList.add('product_desc');
+        dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
 
-            dataName.classList.add('product_name');
-            dataName.textContent = `${objectData.nom}`;
-            
+        dataDispo.classList.add('product_avail');
+        dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
+        dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
 
-            dataPrice.classList.add('product_price');
-            dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
+        dataCat.classList.add('product_cat');
+        dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
-            dataImg.classList.add('product_img');
-            dataImg.setAttribute('src',`${objectData.image}`);
+        
+        // Push Datas in DOM
+        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
-            dataDesc.classList.add('product_desc');
-            dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
+        //Push Global Datas
+        document.querySelector('.fiches').append(dataWrapper);
 
-            dataDispo.classList.add('product_avail');
-            dataDispo.textContent = `${objectData.disponibilite === true ? 'En stock':'En rupture de stock'}`;
-            dataDispo.dataset.available = `${objectData.disponibilite === true ? 'on':'off'}`;
+        // Print Console Datas
+        // console.table(`${values} : ${dataSet[data][values]}`);
 
-            dataCat.classList.add('product_cat');
-            dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
-
-            
-            // Push Datas in DOM
-            dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
-
-            //Push Global Datas
-            document.querySelector('.fiches').append(dataWrapper);
-
-            // Print Console Datas
-            // console.table(`${values} : ${dataSet[data][values]}`);
-
-        }
 
     }
 
