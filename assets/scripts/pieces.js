@@ -5,15 +5,16 @@ const dataSet = await fetchDatas.json();
 
     
     getProductDatas(dataSet);
+    
 
     //Ordered BY Price
-      const filteredByPrice = document.querySelector('.btn-filter-price');
+      const orderedByPrice = document.querySelector('.btn-filter-price');
 
-      filteredByPrice.addEventListener('click',(e)=> {
+      orderedByPrice.addEventListener('click',(e)=> {
 
-        filterPrice(dataSet);
+        orderedPrice(dataSet);
 
-      });
+      },{once:true});
 
 
       //Filtered BY Price
@@ -23,7 +24,7 @@ const dataSet = await fetchDatas.json();
 
         filteredPrice(dataSet);
 
-      });
+      },{once:true});
 
 
 
@@ -105,7 +106,7 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
 
 
 
-function filterPrice(dataElement){
+function orderedPrice(dataElement){
 
     let copyOfdataElement = Array.from(dataElement);
 
@@ -130,7 +131,7 @@ function filteredPrice(dataElement) {
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log(dataFiltered);
+    console.log('Filtered Data =>', dataFiltered);
 }
 
 
