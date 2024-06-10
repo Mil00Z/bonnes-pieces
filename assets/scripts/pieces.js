@@ -6,10 +6,17 @@ const dataSet = await fetchDatas.json();
     
     getProductDatas(dataSet);
 
-   
+    //Ordered BY Price
+      const filteredByPrice = document.querySelector('.btn-filter-price');
+
+      filteredByPrice.addEventListener('click',(e)=> {
+
+        filterPrice(dataSet);
+
+      });
 
 
-
+     
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -72,6 +79,8 @@ async function getProductDatas(dataElement) {
 
 }
 
+  
+
 // Funny Display of Datas on DOM
 function eventDisplayDatas(eventName, targetEvent,datas) {
 
@@ -83,4 +92,22 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
 
 }
 
+
+
+function filterPrice(dataElement){
+
+    let copyOfdataElement = Array.from(dataElement);
+
+    copyOfdataElement.sort((a,b) => {
+        
+        //  Have to check how create an sub function of this with integration of prop (price) of Data
+        return a.prix - b.prix ;
+
+    });
+
+    console.log('initial Data =>', dataElement);
+    console.log('Ordered Data =>', copyOfdataElement);
+
+    // getProductDatas(copyOfdataElement);
+}
 
