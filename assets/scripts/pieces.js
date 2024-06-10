@@ -3,7 +3,7 @@ const productsFile = "../../pieces-autos.json";
 const fetchDatas = await fetch(productsFile);
 const dataSet = await fetchDatas.json();
 
-
+    
     getProductDatas(dataSet);
 
    
@@ -84,11 +84,11 @@ async function getProductDatas(dataElement) {
 }
 
 // Funny Display of Datas on DOM
-function eventDisplayDatas(eventName, targetEvent) {
+function eventDisplayDatas(eventName, targetEvent,datas) {
 
     document.querySelector(`${targetEvent}`).addEventListener(`${eventName}`,(e) =>{
 
-        getProductDatas(dataSet);
+        getProductDatas(datas);
     
     }, {once:true});
 
