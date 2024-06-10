@@ -84,7 +84,7 @@ header h1 {
 	flex-direction:column;
 	width: 45%;
 	row-gap:var(--gap);
-	padding:.7rem;
+	padding:.85rem;
 	font-size:1rem;
 	color:var(--white-color);
 	background-color:var(--main-color);
@@ -104,10 +104,10 @@ header h1 {
 .product_avail[data-available='on']{
 
 	color:var(--product-available);
+	font-weight: bold;
 }
 
 .product_avail[data-available='off']{
-
 	color:var(--product-unavailable);
 }
 
@@ -125,15 +125,16 @@ header h1 {
 }
 
 .product_img {
-	max-width: 25%;
+	max-width: 45%;
 	object-fit: cover;
-	align-self: end;
-	
+	align-self: center;
+	margin-top: 2rem;
 }
 
 
 .product_cat {
 	--shadow-color:var(--black-color);
+	position: absolute;
 	width:fit-content;
 	padding:.5rem;
 	font-weight: bold;;
@@ -175,7 +176,7 @@ header h1 {
 	}
 
 		.product {
-			width:100%;
+			width: clamp(25vw,42%,310px);
 		}
 }
 
