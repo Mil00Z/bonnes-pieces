@@ -82,6 +82,24 @@ header h1 {
 	text-align: center;
 }
 
+.list-filtered {
+	--border-color:var(--product-available);
+	display: flex;
+	flex-direction: column;
+	gap: .8rem;
+	padding-block:.5rem;
+	font-size:1.15rem;
+	font-weight: bold;
+	color:var(--black-color);
+	border: var(--border-style-componant);
+	background:var(--product-available);
+}
+
+.item-filtered{
+	font-size:1rem;
+	font-weight: initial;
+}
+
 
 /* Datas Fetched Object */
 .product {
@@ -189,6 +207,10 @@ header h1 {
 	border-radius: var(--radius);
 }
 
+.btn:hover {
+	cursor:pointer;
+}
+
 .btn-filter-price{
 
 }
@@ -196,6 +218,13 @@ header h1 {
 .btn-filter-product {
 
 }
+
+.btn-get-product-lower-price:hover, .active {
+	color:var(--black-color);
+	background: var(--product-available);
+}
+
+
 @media all and (max-width:950px) {
 
 	body{

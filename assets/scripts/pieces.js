@@ -60,20 +60,32 @@ const dataSet = await fetchDatas.json();
 
 
 
+      const productByPrice = document.querySelector('.btn-get-product-lower-price');
 
-    // Create SubArray Of Simple Data of Main DataSet
-    const getNameData = dataSet.map((dataElement) => {
+      productByPrice.addEventListener('click',(e)=>{
+
+        e.target.classList.add('active');
+
+        // Create SubArray Of Simple Data of Main DataSet
+        const getNameData = dataSet.map((dataElement) => {
         
         return dataElement.nom ;
 
-    });
-    console.log('get Name of Data =>',getNameData);
+        });
+        // console.log('get Name of Data =>',getNameData);
+
+        //Get Array of Product < 35 euros
+        let targetPrice = 35 ;
+
+        getProductByLowerPrice(dataSet,getNameData,targetPrice);
+
+        displayProductByLowerPrice(getNameData,targetPrice);
+
+    },{once:true});
+
+
 
     
-    //Get Array of Product < 35 euros
-    let targetPrice = 35 ;
-    getProductByLowerPrice(dataSet,targetPrice);
-    displayProductByLowerPrice(getNameData,targetPrice);
 
   
      
@@ -221,7 +233,7 @@ function filteredStock(dataElement){
 
 }
 
-function getProductByLowerPrice(dataElement,priceCondition) {
+function getProductByLowerPrice(dataElement,subArrayOfData,priceCondition) {
 
     // Looping on element
     for (let i= dataElement.length - 1; i>=0 ; i-- ){
@@ -232,7 +244,7 @@ function getProductByLowerPrice(dataElement,priceCondition) {
                 console.log(`prix trop élevé (> ${priceCondition} euros) pour l'élèment index = ${i} =>`, dataElement[i].nom);
 
                 //Remove items in Array of Product Name 
-                getNameData.splice(i,1);
+                subArrayOfData.splice(i,1);
 
          }
     }   
@@ -264,7 +276,7 @@ function displayProductByLowerPrice(subArrayOfData,priceCondition) {
    for (let i=0 ; i < subArrayOfData.length ; i ++) {
 
        const productItemSlicedByPrice = document.createElement('li');
-       productItemSlicedByPrice.classList.add('.item-filtered');
+       productItemSlicedByPrice.classList.add('item-filtered');
        productItemSlicedByPrice.textContent = `${subArrayOfData[i]}`;
        productListSlicedByPrice.append(productItemSlicedByPrice);
    }
