@@ -60,6 +60,16 @@ const dataSet = await fetchDatas.json();
       },{once:true});
 
 
+
+    const getNameDataSet = dataSet.map((dataElement) => {
+        
+        return dataElement.nom ;
+
+    });
+
+    console.log('get Name of Data =>',getNameDataSet);
+
+
     
 // FUNCTIONS
 // Get Set Display Datas Products
