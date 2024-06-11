@@ -61,36 +61,38 @@ const dataSet = await fetchDatas.json();
 
 
 
-    const getNameDataSet = dataSet.map((dataElement) => {
+
+    
+    const getNameData = dataSet.map((dataElement) => {
         
         return dataElement.nom ;
 
     });
 
-    console.log('get Name of Data =>',getNameDataSet);
+    console.log('get Name of Data =>',getNameData);
+
+    //Get Array of Product < 35 euros
+    getProductByLowerPrice(dataSet,35);
+
+  
 
 
-    for (let i= dataSet.length - 1; i>=0 ; i-- ){
+      //Create Element Wrapper
+      const productListSlicedByPrice = document.createElement('ul');
+      productListSlicedByPrice.classList.add('list-filtered');
+      productListSlicedByPrice.textContent = `Produits < 35 euros`;
 
-            if (dataSet[i].prix < 35) {
-                    console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataSet[i].nom);
 
-                    
-                    getNameDataSet.splice(i,1);
-                }
+    for (let i=0 ; i < getNameData.length ; i ++) {
+
+        const productItemSlicedByPrice = document.createElement('li');
+        productItemSlicedByPrice.classList.add('.item-filtered');
+        productItemSlicedByPrice.textContent = `${getNameData[i]}`;
+        productListSlicedByPrice.append(productItemSlicedByPrice);
     }
 
-// Exemple for Falsy Result with Array Parse by the beginning
-//     for (let i= 0; i < dataSet.length ; i++ ){
-
-//         if (dataSet[i].prix < 35) {
-//                 console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataSet[i].nom);
-
-                
-//                 getNameDataSet.splice(i,1);
-//             }
-// }
-    console.log(getNameDataSet);
+    // Add Datas in DOM target Area
+    document.querySelector('.filtres').append(productListSlicedByPrice);
 
 
 
@@ -98,6 +100,12 @@ const dataSet = await fetchDatas.json();
 
 
     
+
+
+
+
+
+
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -245,6 +253,36 @@ function filteredStock(dataElement){
 }
 
 
+function getProductByLowerPrice(dataElement,priceCondition) {
 
+    // Looping on element
+    for (let i= dataElement.length - 1; i>=0 ; i-- ){
+
+        // Price Condition
+        if (dataElement[i].prix > priceCondition) {
+
+                console.log(`prix trop élevé (> ${priceCondition} euros) pour l'élèment index = ${i} =>`, dataElement[i].nom);
+
+                //Remove items in Array of Product Name 
+                getNameData.splice(i,1);
+
+         }
+    }   
+
+
+    // Exemple for Falsy Result with Array Parse by the beginning
+//     for (let i= 0; i < dataElement.length ; i++ ){
+
+//         if (dataSet[i].prix < 35) {
+//                 console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataElement[i].nom);
+
+                
+//                 getNameData.splice(i,1);
+//             }
+// }
+
+    // Display Array of Modified Data
+    // console.log(getNameData);
+}
 
 
