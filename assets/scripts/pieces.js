@@ -50,7 +50,6 @@ const dataSet = await fetchDatas.json();
 
 
       // Filtered BY Stock
-
       const filteredByStock = document.querySelector('.btn-get-stock');
 
       filteredByStock.addEventListener('click',(e) =>{
@@ -62,47 +61,22 @@ const dataSet = await fetchDatas.json();
 
 
 
-    
+    // Create SubArray Of Simple Data of Main DataSet
     const getNameData = dataSet.map((dataElement) => {
         
         return dataElement.nom ;
 
     });
-
     console.log('get Name of Data =>',getNameData);
 
+    
     //Get Array of Product < 35 euros
-    getProductByLowerPrice(dataSet,35);
+    let targetPrice = 35 ;
+    getProductByLowerPrice(dataSet,targetPrice);
+    displayProductByLowerPrice(getNameData,targetPrice);
 
   
-
-
-      //Create Element Wrapper
-      const productListSlicedByPrice = document.createElement('ul');
-      productListSlicedByPrice.classList.add('list-filtered');
-      productListSlicedByPrice.textContent = `Produits < 35 euros`;
-
-
-    for (let i=0 ; i < getNameData.length ; i ++) {
-
-        const productItemSlicedByPrice = document.createElement('li');
-        productItemSlicedByPrice.classList.add('.item-filtered');
-        productItemSlicedByPrice.textContent = `${getNameData[i]}`;
-        productListSlicedByPrice.append(productItemSlicedByPrice);
-    }
-
-    // Add Datas in DOM target Area
-    document.querySelector('.filtres').append(productListSlicedByPrice);
-
-
-
-
-
-
-    
-
-
-
+     
 
 
 
@@ -168,8 +142,6 @@ async function getProductDatas(dataElement) {
 
 }
 
-  
-
 // Funny Display of Datas on DOM
 function eventDisplayDatas(eventName, targetEvent,datas) {
 
@@ -180,7 +152,6 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
     }, {once:true});
 
 }
-
 
 
 function orderedPrice(dataElement){
@@ -226,7 +197,6 @@ function filteredPrice(dataElement) {
     console.log('Filtered Data Price =>', dataFiltered);
 }
 
-
 function filteredDesc(dataElement){
 
     let dataDescFiltered = dataElement.filter((data) =>{
@@ -239,7 +209,6 @@ function filteredDesc(dataElement){
 
 }
 
-
 function filteredStock(dataElement){
 
     let dataStockFiltered = dataElement.filter((data) => {
@@ -251,7 +220,6 @@ function filteredStock(dataElement){
     console.log('Filtered Data Stock =>',dataStockFiltered);
 
 }
-
 
 function getProductByLowerPrice(dataElement,priceCondition) {
 
@@ -283,6 +251,27 @@ function getProductByLowerPrice(dataElement,priceCondition) {
 
     // Display Array of Modified Data
     // console.log(getNameData);
+}
+
+function displayProductByLowerPrice(subArrayOfData,priceCondition) {
+
+     //Create Element Wrapper
+     const productListSlicedByPrice = document.createElement('ul');
+     productListSlicedByPrice.classList.add('list-filtered');
+     productListSlicedByPrice.textContent = `Produits < ${priceCondition} euros`;
+
+
+   for (let i=0 ; i < subArrayOfData.length ; i ++) {
+
+       const productItemSlicedByPrice = document.createElement('li');
+       productItemSlicedByPrice.classList.add('.item-filtered');
+       productItemSlicedByPrice.textContent = `${subArrayOfData[i]}`;
+       productListSlicedByPrice.append(productItemSlicedByPrice);
+   }
+
+   // Add Datas in DOM target Area
+   document.querySelector('.filtres').append(productListSlicedByPrice);
+
 }
 
 
