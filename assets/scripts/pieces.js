@@ -70,6 +70,33 @@ const dataSet = await fetchDatas.json();
     console.log('get Name of Data =>',getNameDataSet);
 
 
+    for (let i= dataSet.length - 1; i>=0 ; i-- ){
+
+            if (dataSet[i].prix < 35) {
+                    console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataSet[i].nom);
+
+                    
+                    getNameDataSet.splice(i,1);
+                }
+    }
+
+// Exemple for Falsy Result with Array Parse by the beginning
+//     for (let i= 0; i < dataSet.length ; i++ ){
+
+//         if (dataSet[i].prix < 35) {
+//                 console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataSet[i].nom);
+
+                
+//                 getNameDataSet.splice(i,1);
+//             }
+// }
+    console.log(getNameDataSet);
+
+
+
+
+
+
     
 // FUNCTIONS
 // Get Set Display Datas Products
