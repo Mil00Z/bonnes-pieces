@@ -82,20 +82,40 @@ header h1 {
 	text-align: center;
 }
 
+.abordables {
+	display: block;
+	width:100%;
+	padding-block:.5rem;
+	border: var(--border-style-componant);
+	background:orange;
+}
+
+.abordables > p,
+.disponibles > p {
+	padding-left:1rem;
+	font-size:1.2rem;
+	font-weight: bold;
+}
+
+.disponibles {
+	display: block;
+	width:100%;
+	padding-block:.5rem;
+	border: var(--border-style-componant);
+	background:var(--product-available);
+}
+
 .list-filtered {
 	--border-color:var(--product-available);
 	display: flex;
 	flex-direction: column;
 	gap: .8rem;
-	padding-block:.5rem;
 	font-size:1.15rem;
-	font-weight: bold;
 	color:var(--black-color);
-	border: var(--border-style-componant);
-	background:var(--product-available);
 }
 
 .item-filtered{
+	padding:.45rem;
 	font-size:1rem;
 	font-weight: initial;
 }
@@ -219,8 +239,17 @@ header h1 {
 
 }
 
-.btn-get-product-lower-price:hover, .active {
-	color:var(--black-color);
+.btn-get-product-lower-price:hover,
+.btn-get-product-dispo:hover,
+.active {
+	color:var(--black-color)
+}
+
+.btn-get-product-lower-price:hover {
+	background: orange;
+}
+
+.btn-get-product-dispo:hover {
 	background: var(--product-available);
 }
 

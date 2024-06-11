@@ -68,11 +68,19 @@ const dataSet = await fetchDatas.json();
 
         // Create SubArray Of Simple Data of Main DataSet
         const getNameData = dataSet.map((dataElement) => {
-        
-        return dataElement.nom ;
-
+            return dataElement.nom;
         });
         // console.log('get Name of Data =>',getNameData);
+
+
+        // const getPriceData = dataSet.map((dataElement) => {
+
+        //     return dataElement.description;
+
+        // });
+
+        // console.log(getPriceData);
+
 
         //Get Array of Product < 35 euros
         let targetPrice = 35 ;
@@ -84,11 +92,70 @@ const dataSet = await fetchDatas.json();
     },{once:true});
 
 
+    const productByDispo = document.querySelector('.btn-get-product-dispo');
 
-    
+    productByDispo.addEventListener('click',(e) =>{
 
-  
-     
+        e.target.classList.add('active');
+
+        
+     // Create SubArray Of Simple Data of Main DataSet
+    const getNameData = dataSet.map(dataElement=>dataElement.nom);
+
+    const getPriceData = dataSet.map(dataElement=>dataElement.prix);
+
+    const getDescData = dataSet.map(dataElement=>dataElement.description);
+
+    console.log('Data Before Actions =>',getNameData,getPriceData,getDescData);
+
+
+        // Looping on element
+        for (let i= dataSet.length - 1; i>=0 ; i-- ){
+
+            // Price Condition
+            if (dataSet[i].disponibilite === false) {
+                
+                    //Remove items in Array of Product Name 
+                    getNameData.splice(i,1);
+                    getPriceData.splice(i,1);
+                    getDescData.splice(i,1);
+            }
+        }   
+
+        
+    //Rename Array After Action on It
+    let productPriceAvailable = getPriceData ;
+
+    //Create Element Wrapper
+    const productListAvailable = document.createElement('ul');
+    productListAvailable.classList.add('list-filtered');
+
+    for (let i=0; i < productPriceAvailable.length;i++) {
+
+        const productItemAvailable = document.createElement('li');
+        productItemAvailable.classList.add('item-filtered');
+
+        productItemAvailable.textContent=`${getNameData[i]} __ ${getPriceData[i]}euros
+        __ ${getDescData[i] ?? 'pas de description'}`;
+
+            //FULL UL
+        productListAvailable.append(productItemAvailable);
+
+        }
+
+        // Add Datas in DOM target Area
+        document.querySelector('.disponibles').append(productListAvailable);
+
+    console.log('Data AFter Actions =>',getNameData,productPriceAvailable);
+
+    });
+
+
+
+
+
+
+
 
 
 
@@ -270,20 +337,26 @@ function displayProductByLowerPrice(subArrayOfData,priceCondition) {
      //Create Element Wrapper
      const productListSlicedByPrice = document.createElement('ul');
      productListSlicedByPrice.classList.add('list-filtered');
-     productListSlicedByPrice.textContent = `Produits < ${priceCondition} euros`;
-
+    
 
    for (let i=0 ; i < subArrayOfData.length ; i ++) {
 
        const productItemSlicedByPrice = document.createElement('li');
        productItemSlicedByPrice.classList.add('item-filtered');
-       productItemSlicedByPrice.textContent = `${subArrayOfData[i]}`;
+
+       const productNameSlicedByPrice = document.createElement('h4');
+       productNameSlicedByPrice.textContent = `${subArrayOfData[i]}`;
+
+    
+        //FULL LI
+       productItemSlicedByPrice.append(productNameSlicedByPrice);
+
+        //FULL UL
        productListSlicedByPrice.append(productItemSlicedByPrice);
    }
 
    // Add Datas in DOM target Area
-   document.querySelector('.filtres').append(productListSlicedByPrice);
-
+   document.querySelector('.abordables').append(productListSlicedByPrice);
 }
 
 
