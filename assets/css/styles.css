@@ -11,6 +11,7 @@
 
 	--product-categorie:#06a9f5;
 	--product-available:#34f50d;
+	--product-price-ok:#05e8ff;
 	--product-unavailable:#000000;
 	--filter-shadow:2px 2px 4px var(--shadow-color);
 	--border-color:var(--black-color);
@@ -55,7 +56,7 @@ header h1 {
 	--gap-common:.9rem;
 	display:flex;
 	column-gap:var(--gap-common);
-	max-width: var(--skeleton);
+	/* max-width: var(--skeleton); */
 }
 
 
@@ -80,6 +81,54 @@ header h1 {
 	font-size:1.5rem;
 	font-weight: bold;
 	text-align: center;
+}
+
+.abordables,
+.disponibles {
+	display: block;
+	width:100%;
+	padding-block:.5rem;
+	border: var(--border-style-componant);
+	border-radius: var(--radius);
+}
+
+.abordables {
+	background:var(--product-price-ok);
+}
+
+.disponibles {
+	background:var(--product-available);
+}
+
+.abordables > p,
+.disponibles > p {
+	padding-left:1rem;
+	font-size:1.2rem;
+	font-weight: bold;
+	color:var(--white-color);
+}
+
+.disponibles {
+	display: block;
+	width:100%;
+	padding-block:.5rem;
+	border: var(--border-style-componant);
+	background:var(--product-available);
+}
+
+.list-filtered {
+	--border-color:var(--product-available);
+	display: flex;
+	flex-direction: column;
+	gap: .8rem;
+	font-size:1.15rem;
+	color:var(--black-color);
+}
+
+.item-filtered{
+	padding:.45rem;
+	font-size:1rem;
+	font-weight: initial;
 }
 
 
@@ -189,6 +238,10 @@ header h1 {
 	border-radius: var(--radius);
 }
 
+.btn:hover {
+	cursor:pointer;
+}
+
 .btn-filter-price{
 
 }
@@ -196,6 +249,22 @@ header h1 {
 .btn-filter-product {
 
 }
+
+.btn-get-product-lower-price:hover,
+.btn-get-product-dispo:hover,
+.active {
+	color:var(--black-color)
+}
+
+.btn-get-product-lower-price:hover {
+	background: #05e8ff;
+}
+
+.btn-get-product-dispo:hover {
+	background: var(--product-available);
+}
+
+
 @media all and (max-width:950px) {
 
 	body{

@@ -3,7 +3,7 @@ const productsFile = "../../pieces-autos.json";
 const fetchDatas = await fetch(productsFile);
 const dataSet = await fetchDatas.json();
 
-    
+
     getProductDatas(dataSet);
 
 
@@ -39,27 +39,89 @@ const dataSet = await fetchDatas.json();
 
 
       // Filtered BY Desc
-
       const filteredByDesc = document.querySelector('.btn-get-desc');
 
       filteredByDesc.addEventListener('click',(e) => {
 
-            let dataDescFiltered = dataSet.filter((data) =>{
 
-                return data.description;
+        filteredDesc(dataSet);
 
-            });
+      },{once:true});
 
-            console.log(dataDescFiltered);
 
-      });
+      // Filtered BY Stock
+      const filteredByStock = document.querySelector('.btn-get-stock');
 
+      filteredByStock.addEventListener('click',(e) =>{
+
+        filteredStock(dataSet);
+
+      },{once:true});
+
+
+
+      const productByPrice = document.querySelector('.btn-get-product-lower-price');
+
+      productByPrice.addEventListener('click',(e)=>{
+
+        e.target.classList.add('active');
+
+        // Create SubArray Of Simple Data of Main DataSet
+        const getNameData = dataSet.map((dataElement) => {
+            return dataElement.nom;
+        });
+        // console.log('get Name of Data =>',getNameData);
+
+
+        // const getPriceData = dataSet.map((dataElement) => {
+
+        //     return dataElement.description;
+
+        // });
+
+        // console.log(getPriceData);
+
+
+        //Get Array of Product < 35 euros
+        let targetPrice = 35 ;
+
+        getProductByLowerPrice(dataSet,getNameData,targetPrice);
+
+        displayProductByLowerPrice(getNameData);
+
+    },{once:true});
+
+
+    const productByDispo = document.querySelector('.btn-get-product-dispo');
+
+    productByDispo.addEventListener('click',(e) =>{
+
+        e.target.classList.add('active');
 
     
+    // Create SubArray Of Simple Data of Main DataSet
+    const getNameData = dataSet.map(dataElement=>dataElement.nom);
+    const getPriceData = dataSet.map(dataElement=>dataElement.prix);
+    const getDescData = dataSet.map(dataElement=>dataElement.description);
+
+    console.log('Data Before Actions =>',getNameData,getPriceData,getDescData);
 
 
+    getProductAvailable(dataSet,getNameData,getPriceData,getDescData);
+
+      // Arrays
+       let productNameAvailable = getNameData;
+       let productPriceAvailable = getPriceData;
+       let productDescAvailable = getDescData;
+
+    displayProductAvailable(productNameAvailable,productPriceAvailable,productDescAvailable);
+
+    console.log('Data After Actions =>',productNameAvailable,productPriceAvailable,productDescAvailable);
+
+    },{once:true});
 
 
+ 
 // FUNCTIONS
 // Get Set Display Datas Products
 async function getProductDatas(dataElement) {
@@ -122,8 +184,6 @@ async function getProductDatas(dataElement) {
 
 }
 
-  
-
 // Funny Display of Datas on DOM
 function eventDisplayDatas(eventName, targetEvent,datas) {
 
@@ -134,8 +194,6 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
     }, {once:true});
 
 }
-
-
 
 function orderedPrice(dataElement){
 
@@ -152,7 +210,7 @@ function orderedPrice(dataElement){
     console.log('Ordered Data Price =>', copyOfdataElement);
 }
 
-function desorderedPrice(dataElement){
+function desorderedPrice(dataElement) {
 
     let copyOfdataElement = Array.from(dataElement);
 
@@ -180,8 +238,132 @@ function filteredPrice(dataElement) {
     console.log('Filtered Data Price =>', dataFiltered);
 }
 
+function filteredDesc(dataElement) {
+
+    let dataDescFiltered = dataElement.filter((data) =>{
+
+        return data.description;
+
+    });
+
+    console.log('Filtered Data Desc =>',dataDescFiltered);
+
+}
+
+function filteredStock(dataElement) {
+
+    let dataStockFiltered = dataElement.filter((data) => {
+
+        return data.disponibilite;
+
+    });
+
+    console.log('Filtered Data Stock =>',dataStockFiltered);
+
+}
+
+function getProductByLowerPrice(dataElement,subArrayOfData,priceCondition) {
+
+    // Looping on element
+    for (let i= dataElement.length - 1; i>=0 ; i-- ){
+
+        // Price Condition
+        if (dataElement[i].prix > priceCondition) {
+
+                console.log(`prix trop élevé (> ${priceCondition} euros) pour l'élèment index = ${i} =>`, dataElement[i].nom);
+
+                //Remove items in Array of Product Name 
+                subArrayOfData.splice(i,1);
+
+         }
+    }   
 
 
+    // Exemple for Falsy Result with Array Parse by the beginning
+//     for (let i= 0; i < dataElement.length ; i++ ){
 
+//         if (dataSet[i].prix < 35) {
+//                 console.log(`prix trop élevé pour l'élèment index = ${i} =>`, dataElement[i].nom);
+
+                
+//                 getNameData.splice(i,1);
+//             }
+// }
+
+}
+
+function displayProductByLowerPrice(subArrayOfData) {
+
+     //Create Element Wrapper
+     const productListSlicedByPrice = document.createElement('list-product');
+     productListSlicedByPrice.classList.add('list-filtered');
+    
+
+   for (let i=0 ; i < subArrayOfData.length ; i ++) {
+
+       const productItemSlicedByPrice = document.createElement('item-product');
+       productItemSlicedByPrice.classList.add('item-filtered');
+
+       const productNameSlicedByPrice = document.createElement('div');
+       productNameSlicedByPrice.textContent = `${subArrayOfData[i]}`;
+
+    
+        //FULL LI
+       productItemSlicedByPrice.append(productNameSlicedByPrice);
+
+        //FULL UL
+       productListSlicedByPrice.append(productItemSlicedByPrice);
+   }
+
+   // Add Datas in DOM target Area
+   document.querySelector('.abordables').append(productListSlicedByPrice);
+} 
+
+function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc) {
+        
+    // Looping on element
+    for (let i= dataElement.length - 1; i>=0 ; i--) {
+
+        // Price Condition
+        if (dataElement[i].disponibilite === false) {
+
+            //Remove items in Arrays of Product
+            subArrayName.splice(i,1);
+            console.log(subArrayName);
+            subArrayPrice.splice(i,1);
+            subArrayDesc.splice(i,1);
+        }
+
+    }
+
+    //Get New Array of datas because splitted before
+    let productNameAvailable = subArrayName;
+    let productPriceAvailable = subArrayPrice;
+    let productDescAvailable = subArrayDesc;
+
+    return productNameAvailable,productPriceAvailable,productDescAvailable;
+}
+
+function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
+
+    //Create Element Wrapper
+    const productListAvailable = document.createElement('ul');
+    productListAvailable.classList.add('list-filtered');
+
+    for (let i=0; i < subArrayName.length;i++) {
+
+        const productItemAvailable = document.createElement('li');
+        productItemAvailable.classList.add('item-filtered');
+
+        productItemAvailable.textContent=`${subArrayName[i]} -- ${SubArrayPrice[i]}euros -- ${SubArrayDesc[i] ?? 'pas de description'}`;
+
+            //FULL UL
+        productListAvailable.append(productItemAvailable);
+        }
+
+        // Add Datas in DOM target Area
+        document.querySelector('.disponibles').append(productListAvailable);
+
+}
 
 
