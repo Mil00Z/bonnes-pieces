@@ -295,16 +295,16 @@ function getProductByLowerPrice(dataElement,subArrayOfData,priceCondition) {
 function displayProductByLowerPrice(subArrayOfData) {
 
      //Create Element Wrapper
-     const productListSlicedByPrice = document.createElement('ul');
+     const productListSlicedByPrice = document.createElement('list-product');
      productListSlicedByPrice.classList.add('list-filtered');
     
 
    for (let i=0 ; i < subArrayOfData.length ; i ++) {
 
-       const productItemSlicedByPrice = document.createElement('li');
+       const productItemSlicedByPrice = document.createElement('item-product');
        productItemSlicedByPrice.classList.add('item-filtered');
 
-       const productNameSlicedByPrice = document.createElement('h4');
+       const productNameSlicedByPrice = document.createElement('div');
        productNameSlicedByPrice.textContent = `${subArrayOfData[i]}`;
 
     
@@ -329,6 +329,7 @@ function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc
 
             //Remove items in Arrays of Product
             subArrayName.splice(i,1);
+            console.log(subArrayName);
             subArrayPrice.splice(i,1);
             subArrayDesc.splice(i,1);
         }
@@ -336,9 +337,9 @@ function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc
     }
 
     //Get New Array of datas because splitted before
-    let productNameAvailable = subArrayName.slice();
-    let productPriceAvailable = subArrayPrice.slice();
-    let productDescAvailable = subArrayDesc.slice();
+    let productNameAvailable = subArrayName;
+    let productPriceAvailable = subArrayPrice;
+    let productDescAvailable = subArrayDesc;
 
     return productNameAvailable,productPriceAvailable,productDescAvailable;
 }

@@ -11,6 +11,7 @@
 
 	--product-categorie:#06a9f5;
 	--product-available:#34f50d;
+	--product-price-ok:#05e8ff;
 	--product-unavailable:#000000;
 	--filter-shadow:2px 2px 4px var(--shadow-color);
 	--border-color:var(--black-color);
@@ -82,12 +83,21 @@ header h1 {
 	text-align: center;
 }
 
-.abordables {
+.abordables,
+.disponibles {
 	display: block;
 	width:100%;
 	padding-block:.5rem;
 	border: var(--border-style-componant);
-	background:#05e8ff;
+	border-radius: var(--radius);
+}
+
+.abordables {
+	background:var(--product-price-ok);
+}
+
+.disponibles {
+	background:var(--product-available);
 }
 
 .abordables > p,
