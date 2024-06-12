@@ -55,7 +55,7 @@ header h1 {
 	--gap-common:.9rem;
 	display:flex;
 	column-gap:var(--gap-common);
-	max-width: var(--skeleton);
+	/* max-width: var(--skeleton); */
 }
 
 
@@ -87,7 +87,7 @@ header h1 {
 	width:100%;
 	padding-block:.5rem;
 	border: var(--border-style-componant);
-	background:orange;
+	background:#05e8ff;
 }
 
 .abordables > p,
@@ -95,6 +95,7 @@ header h1 {
 	padding-left:1rem;
 	font-size:1.2rem;
 	font-weight: bold;
+	color:var(--white-color);
 }
 
 .disponibles {
@@ -246,7 +247,7 @@ header h1 {
 }
 
 .btn-get-product-lower-price:hover {
-	background: orange;
+	background: #05e8ff;
 }
 
 .btn-get-product-dispo:hover {
