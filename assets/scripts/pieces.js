@@ -6,14 +6,22 @@ const dataSet = await fetchDatas.json();
 
     getProductDatas(dataSet);
 
+    
 
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');
 
       orderedByPrice.addEventListener('click',(e)=> {
 
-        orderedPrice(dataSet);
+        // orderedPrice(dataSet);
 
+        //Clear DOM Area of Datas
+        document.querySelector('.displayed-datas').innerHTML='';
+
+        //Display datas with function who ordered datas
+        getProductDatas(orderedPrice(dataSet));
+
+    
       },{once:true});
 
 
@@ -23,7 +31,12 @@ const dataSet = await fetchDatas.json();
 
       desorderedByPrice.addEventListener('click',(e)=> {
 
-        desorderedPrice(dataSet);
+        // desorderedPrice(dataSet);
+
+        //Clear DOM Area of Datas
+        document.querySelector('.displayed-datas').innerHTML='';
+
+        getProductDatas(desorderedPrice(dataSet));
 
       },{once:true});
 
@@ -33,7 +46,12 @@ const dataSet = await fetchDatas.json();
 
       filteredUnderPrice.addEventListener('click',(e) =>{
 
-        filteredPrice(dataSet);
+        // filteredPrice(dataSet);
+
+        //Clear DOM Area of Datas
+        document.querySelector('.displayed-datas').innerHTML='';
+
+        getProductDatas(filteredPrice(dataSet));
 
       },{once:true});
 
@@ -43,8 +61,12 @@ const dataSet = await fetchDatas.json();
 
       filteredByDesc.addEventListener('click',(e) => {
 
+        // filteredDesc(dataSet);
 
-        filteredDesc(dataSet);
+        //Clear DOM Area of Datas
+        document.querySelector('.displayed-datas').innerHTML='';
+
+        getProductDatas(filteredDesc(dataSet));
 
       },{once:true});
 
@@ -55,6 +77,11 @@ const dataSet = await fetchDatas.json();
       filteredByStock.addEventListener('click',(e) =>{
 
         filteredStock(dataSet);
+
+        //Clear DOM Area of Datas
+        document.querySelector('.displayed-datas').innerHTML='';
+
+        getProductDatas(filteredStock(dataSet));
 
       },{once:true});
 
@@ -88,6 +115,8 @@ const dataSet = await fetchDatas.json();
         getProductByLowerPrice(dataSet,getNameData,targetPrice);
 
         displayProductByLowerPrice(getNameData);
+
+        document.querySelector('.displayed-datas').innerHTML = '';
 
     },{once:true});
 
@@ -174,11 +203,7 @@ async function getProductDatas(dataElement) {
         dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
         //Push Global Datas
-        document.querySelector('.fiches').append(dataWrapper);
-
-        // Print Console Datas
-        // console.table(`${values} : ${dataSet[data][values]}`);
-
+        document.querySelector('.displayed-datas').append(dataWrapper);
 
     }
 
@@ -207,7 +232,9 @@ function orderedPrice(dataElement){
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log('Ordered Data Price =>', copyOfdataElement);
+    // console.log('Ordered Data Price =>', copyOfdataElement);
+
+    return copyOfdataElement;
 }
 
 function desorderedPrice(dataElement) {
@@ -222,7 +249,9 @@ function desorderedPrice(dataElement) {
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log('Desordered Data Price =>', copyOfdataElement);
+    // console.log('Desordered Data Price =>', copyOfdataElement);
+
+    return copyOfdataElement;
 }
 
 function filteredPrice(dataElement) {
@@ -235,7 +264,9 @@ function filteredPrice(dataElement) {
     });
 
     // console.log('initial Data =>', dataElement);
-    console.log('Filtered Data Price =>', dataFiltered);
+    // console.log('Filtered Data Price =>', dataFiltered);
+
+    return dataFiltered;
 }
 
 function filteredDesc(dataElement) {
@@ -246,7 +277,9 @@ function filteredDesc(dataElement) {
 
     });
 
-    console.log('Filtered Data Desc =>',dataDescFiltered);
+    // console.log('Filtered Data Desc =>',dataDescFiltered);
+
+    return dataDescFiltered;
 
 }
 
@@ -260,6 +293,7 @@ function filteredStock(dataElement) {
 
     console.log('Filtered Data Stock =>',dataStockFiltered);
 
+    return dataStockFiltered;
 }
 
 function getProductByLowerPrice(dataElement,subArrayOfData,priceCondition) {

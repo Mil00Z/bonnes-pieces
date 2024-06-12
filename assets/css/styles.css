@@ -152,7 +152,6 @@ header h1 {
 	border:var(--border-style-componant);
 	border-radius: var(--radius);
 	transition: all .33s ease-in-out;
-
 }
 
 .product_name {
@@ -229,6 +228,16 @@ header h1 {
 .fiches p {
 	margin-block:4px;
 }
+
+
+.displayed-datas {
+	display: flex;
+	justify-content: space-between;
+	width: fit-content;
+	flex-wrap: wrap;
+	gap: var(--gap-common);
+}
+
 
 /* BTN */
 .btn {
