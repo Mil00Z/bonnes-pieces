@@ -88,37 +88,18 @@ header h1 {
 	text-align: center;
 }
 
-.abordables,
-.disponibles {
+.filter-name {
 	display: block;
 	width:100%;
 	padding-block:.5rem;
-	border: var(--border-style-componant);
-	border-radius: var(--radius);
-}
-
-.abordables {
-	background:var(--product-price-ok);
-}
-
-.disponibles {
-	background:var(--product-available);
-}
-
-.abordables > p,
-.disponibles > p {
 	padding-left:1rem;
-	font-size:1.2rem;
-	font-weight: bold;
-	color:var(--white-color);
-}
-
-.disponibles {
-	display: block;
-	width:100%;
-	padding-block:.5rem;
-	border: var(--border-style-componant);
+	text-align: center;
+	font-size:1.1rem;
+	/* font-weight: bold; */
+	color:var(--black-color);
 	background:var(--product-available);
+	border: var(--border-style-componant);
+	border-radius: var(--radius);	
 }
 
 .list-filtered {

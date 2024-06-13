@@ -3,14 +3,11 @@ const productsFile = "../../pieces-autos.json";
 const fetchDatas = await fetch(productsFile);
 const dataSet = await fetchDatas.json();
 
-
-    getProductDatas(dataSet);
-
-    
+    //Display All of Datas
+    displayProductDatas(dataSet);
 
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');
-
       orderedByPrice.addEventListener('click',(e)=> {
 
         // orderedPrice(dataSet);
@@ -18,17 +15,19 @@ const dataSet = await fetchDatas.json();
         //Clear DOM Area of Datas
         document.querySelector('.displayed-datas').innerHTML='';
 
-        //Display datas with function who ordered datas
-        getProductDatas(orderedPrice(dataSet));
+        //Get Data Filter Action
+        const titleFilter = e.target.getAttribute('title');
+        document.querySelector('.filter-name').textContent = `${titleFilter}`;
 
-    
+        //Display datas with function who ordered datas
+        displayProductDatas(orderedPrice(dataSet));
+
       },{once:true});
 
 
 
       //Desordered BY Price
       const desorderedByPrice = document.querySelector('.btn-desorder-price');
-
       desorderedByPrice.addEventListener('click',(e)=> {
 
         // desorderedPrice(dataSet);
@@ -36,14 +35,17 @@ const dataSet = await fetchDatas.json();
         //Clear DOM Area of Datas
         document.querySelector('.displayed-datas').innerHTML='';
 
-        getProductDatas(desorderedPrice(dataSet));
+        //Get Data Filter Action
+        const titleFilter = e.target.getAttribute('title');
+        document.querySelector('.filter-name').textContent = `${titleFilter}`;
+
+        displayProductDatas(desorderedPrice(dataSet));
 
       },{once:true});
 
 
       //Filtered BY Price
       const filteredUnderPrice = document.querySelector('.btn-filter-price');
-
       filteredUnderPrice.addEventListener('click',(e) =>{
 
         // filteredPrice(dataSet);
@@ -51,37 +53,47 @@ const dataSet = await fetchDatas.json();
         //Clear DOM Area of Datas
         document.querySelector('.displayed-datas').innerHTML='';
 
-        getProductDatas(filteredPrice(dataSet));
+        //Get Data Filter Action
+        const titleFilter = e.target.getAttribute('title');
+        document.querySelector('.filter-name').textContent = `${titleFilter}`;
+
+        displayProductDatas(filteredPrice(dataSet));
 
       },{once:true});
 
 
       // Filtered BY Desc
       const filteredByDesc = document.querySelector('.btn-get-desc');
-
       filteredByDesc.addEventListener('click',(e) => {
 
         // filteredDesc(dataSet);
 
         //Clear DOM Area of Datas
-        document.querySelector('.displayed-datas').innerHTML='';
+         document.querySelector('.displayed-datas').innerHTML='';
 
-        getProductDatas(filteredDesc(dataSet));
+        //Get Data Filter Action
+         const titleFilter = e.target.getAttribute('title');
+         document.querySelector('.filter-name').textContent = `${titleFilter}`;
+
+        displayProductDatas(filteredDesc(dataSet));
 
       },{once:true});
 
 
       // Filtered BY Stock
       const filteredByStock = document.querySelector('.btn-get-stock');
-
       filteredByStock.addEventListener('click',(e) =>{
 
-        filteredStock(dataSet);
+        // filteredStock(dataSet);
 
-        //Clear DOM Area of Datas
-        document.querySelector('.displayed-datas').innerHTML='';
+         //Clear DOM Area of Datas
+         document.querySelector('.displayed-datas').innerHTML='';
 
-        getProductDatas(filteredStock(dataSet));
+         //Get Data Filter Action
+         const titleFilter = e.target.getAttribute('title');
+         document.querySelector('.filter-name').textContent = `${titleFilter}`;
+
+        displayProductDatas(filteredStock(dataSet));
 
       },{once:true});
 
@@ -153,10 +165,10 @@ const dataSet = await fetchDatas.json();
  
 // FUNCTIONS
 // Get Set Display Datas Products
-async function getProductDatas(dataElement) {
+async function displayProductDatas(dataElement) {
 
     //Display in Console datas
-    // console.log(dataElement);
+    console.log(dataElement);
 
     for (const data in dataElement) {
 
@@ -170,9 +182,6 @@ async function getProductDatas(dataElement) {
     
         //Afficher les infos des objects dans le tableau retour de données
         const objectData = dataElement[data];
-
-        //Display in Console each Data
-        // console.log(objectData);
     
         // Set Datas
         dataWrapper.classList.add('product');
@@ -198,7 +207,6 @@ async function getProductDatas(dataElement) {
         dataCat.classList.add('product_cat');
         dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
-        
         // Push Datas in DOM
         dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
 
@@ -214,7 +222,7 @@ function eventDisplayDatas(eventName, targetEvent,datas) {
 
     document.querySelector(`${targetEvent}`).addEventListener(`${eventName}`,(e) =>{
 
-        getProductDatas(datas);
+        displayProductDatas(datas);
     
     }, {once:true});
 
@@ -291,7 +299,7 @@ function filteredStock(dataElement) {
 
     });
 
-    console.log('Filtered Data Stock =>',dataStockFiltered);
+    // console.log('Filtered Data Stock =>',dataStockFiltered);
 
     return dataStockFiltered;
 }
@@ -350,7 +358,7 @@ function displayProductByLowerPrice(subArrayOfData) {
    }
 
    // Add Datas in DOM target Area
-   document.querySelector('.abordables').append(productListSlicedByPrice);
+   document.querySelector('.filter-name').append(productListSlicedByPrice);
 } 
 
 function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc) {
@@ -363,7 +371,6 @@ function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc
 
             //Remove items in Arrays of Product
             subArrayName.splice(i,1);
-            console.log(subArrayName);
             subArrayPrice.splice(i,1);
             subArrayDesc.splice(i,1);
         }
@@ -371,11 +378,15 @@ function getProductAvailable(dataElement,subArrayName,subArrayPrice,subArrayDesc
     }
 
     //Get New Array of datas because splitted before
-    let productNameAvailable = subArrayName;
-    let productPriceAvailable = subArrayPrice;
-    let productDescAvailable = subArrayDesc;
 
-    return productNameAvailable,productPriceAvailable,productDescAvailable;
+    // Methode 1
+    // let productNameAvailable = subArrayName;
+    // let productPriceAvailable = subArrayPrice;
+    // let productDescAvailable = subArrayDesc;
+
+    // return productNameAvailable,productPriceAvailable,productDescAvailable;
+
+    return subArrayName,subArrayPrice,subArrayDesc;
 }
 
 function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
@@ -396,7 +407,7 @@ function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
         }
 
         // Add Datas in DOM target Area
-        document.querySelector('.disponibles').append(productListAvailable);
+        document.querySelector('.filter-name').append(productListAvailable);
 
 }
 
