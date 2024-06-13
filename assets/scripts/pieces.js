@@ -44,7 +44,7 @@ const dataSet = await fetchDatas.json();
       },{once:true});
 
 
-      //Filtered BY Price
+//Filtered BY Price
       const filteredUnderPrice = document.querySelector('.btn-filter-price');
       filteredUnderPrice.addEventListener('click',(e) =>{
 
@@ -80,26 +80,41 @@ const dataSet = await fetchDatas.json();
       },{once:true});
 
 
-      // Filtered BY Stock
-      const filteredByStock = document.querySelector('.btn-get-stock');
-      filteredByStock.addEventListener('click',(e) =>{
+// Filtered BY Stock
+const filteredByStock = document.querySelector('.btn-get-stock');
+filteredByStock.addEventListener('click',(e) =>{
 
-        // filteredStock(dataSet);
+    // filteredStock(dataSet);
 
-         //Clear DOM Area of Datas
-         document.querySelector('.displayed-datas').innerHTML='';
+    //Clear DOM Area of Datas
+    document.querySelector('.displayed-datas').innerHTML='';
 
-         //Get Data Filter Action
-         const titleFilter = e.target.getAttribute('title');
-         document.querySelector('.filter-name').textContent = `${titleFilter}`;
+    //Get Data Filter Action
+    const titleFilter = e.target.getAttribute('title');
+    document.querySelector('.filter-name').textContent = `${titleFilter}`;
 
-        displayProductDatas(filteredStock(dataSet));
+    displayProductDatas(filteredStock(dataSet));
 
-      },{once:true});
+},{once:true});
+
+//Range Filtered
+
+const filteredByRange = document.querySelector('#ranged');
+filteredByRange.addEventListener('change',(e) =>{
+
+    //Clear DOM Area of Datas
+    document.querySelector('.displayed-datas').innerHTML='';
+
+    //Get Data Filter Action
+    const titleFilter = e.target.getAttribute('title');
+    document.querySelector('.filter-name').textContent = `${titleFilter} : <= ${e.target.value} euros`;
+
+    displayProductDatas(filteredPriceByRange(dataSet,e.target.value));
+
+});
 
 
-
-      const productByPrice = document.querySelector('.btn-get-product-lower-price');
+      const productByPrice = document.querySelector('.btn-filter-price');
 
       productByPrice.addEventListener('click',(e)=>{
 
@@ -133,7 +148,7 @@ const dataSet = await fetchDatas.json();
     },{once:true});
 
 
-    const productByDispo = document.querySelector('.btn-get-product-dispo');
+    const productByDispo = document.querySelector('.btn-get-stock');
 
     productByDispo.addEventListener('click',(e) =>{
 
@@ -168,7 +183,7 @@ const dataSet = await fetchDatas.json();
 async function displayProductDatas(dataElement) {
 
     //Display in Console datas
-    console.log(dataElement);
+    // console.log('ALL of datas =>',dataElement);
 
     for (const data in dataElement) {
 
@@ -302,6 +317,19 @@ function filteredStock(dataElement) {
     // console.log('Filtered Data Stock =>',dataStockFiltered);
 
     return dataStockFiltered;
+}
+
+function filteredPriceByRange(dataElement,priceRange) {
+
+        let dataPriceByRange = dataElement.filter((data) =>{
+
+            return data.prix <= priceRange ;
+
+        })
+
+        // console.log('Filtered Data Price by range =>',dataPriceByRange);
+
+        return dataPriceByRange;
 }
 
 function getProductByLowerPrice(dataElement,subArrayOfData,priceCondition) {
