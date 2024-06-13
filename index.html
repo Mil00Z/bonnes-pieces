@@ -17,26 +17,22 @@
 			<!-- Menu de recherche -->
 			<section class="filtres">
 				<h3>Filtres</h3>
-				<button class="btn btn-order-price" type="button">Trier par prix croissant</button>
-				<button class="btn btn-desorder-price" type="button">Trier par prix décroissant</button>
-				<button class="btn btn-filter-price" type="button">Filtrer les pièces non abordables</button>
-				<button class="btn btn-get-desc" type="button">Filtrer les pièces avec description</button>
-				<button class="btn btn-get-stock" type="button">Filtrer les pièces avec stock</button>
-				<button class="btn btn-get-product-lower-price" type="button">Afficher les pièces abordables</button>
-				<button class="btn btn-get-product-dispo" type="button">Afficher les pièces disponibles</button>
+				<button class="btn btn-order-price" type="button" title="Produits avec Prix croissant">Trier par prix croissant</button>
+				<button class="btn btn-desorder-price" type="button" title="Produits avec Prix décroissant">Trier par prix décroissant</button>
+				<button class="btn btn-filter-price" type="button" title="Produits Prix Inférieurs à 35 euros">Filtrer les pièces abordables</button>
+				<button class="btn btn-get-desc" type="button" title="Produits avec Description">Filtrer les pièces avec description</button>
+				<button class="btn btn-get-stock" type="button" title="Produits avec Stock">Filtrer les pièces avec stock</button>
+
+				<!-- <button class="btn btn-get-product-lower-price" type="button" title="prix croissant">Afficher les noms des pièces abordables</button>
+				<button class="btn btn-get-product-dispo" type="button" title="prix croissant">Afficher les noms des pièces disponibles</button> -->
+				<input type="range" name="ranged-price" class="btn btn-filter-range-price" id="ranged" min="0" max="50" step="5" title="Produit par tranche de prix">
+
 			</section>
 
 			<!-- Fiches produits -->
 			<section class="fiches">
-
-				<div class="abordables">
-					<p>Pièces Abordables < 35e</p>
-				</div>
-
-
-				<div class="disponibles">
-					<p>Pièces Disponibles</p>
-				</div>
+				<div class="filter-name">Tout les produits</div>
+				<div class="displayed-datas"></div>
 			</section>
 		</main>
 
