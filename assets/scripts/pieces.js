@@ -1,5 +1,8 @@
-// const productsFile = "../api-http/db.json";
-const productsFile = "../../pieces-autos.json";
+import { addListenerAvis } from "./avis.js";
+
+
+// const productsFile = "../../pieces-autos.json";
+const productsFile = 'http://localhost:8081/pieces';
 
 //Fetching Datas
 async function getDatas(dataFile){
@@ -20,12 +23,13 @@ async function initProducts(dataFile) {
 
     //Display All of Datas
     displayProductDatas(dataSet);
+    // displayProductDatas(dataSet.pieces);
 
     return dataSet;
 
 } 
 
-    initProducts(productsFile);
+initProducts(productsFile);
   
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');
@@ -220,7 +224,8 @@ async function displayProductDatas(dataElement) {
         let dataDesc = document.createElement('p');
         let dataDispo = document.createElement('div');
         let dataCat = document.createElement('span');
-        let dataAvis = document.createElement('button');
+        let dataAvisBtn = document.createElement('button');
+        let dataAvis = document.createElement('aside');
     
         //Afficher les infos des objects dans le tableau retour de données
         const objectData = dataElement[data];
@@ -248,16 +253,20 @@ async function displayProductDatas(dataElement) {
         dataCat.classList.add('product_cat');
         dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
-        dataAvis.classList.add('btn');
-        dataAvis.textContent = `Afficher les avis`;
+        dataAvisBtn.classList.add('btn','btn-avis');
+        dataAvisBtn.textContent = `Afficher les avis`;
+
+        dataAvis.classList.add('product_avis');
 
         // Push Datas in DOM
-        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo,dataAvis);
+        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo,dataAvisBtn,dataAvis);
 
         //Push Global Datas
         document.querySelector('.displayed-datas').append(dataWrapper);
-
     }
+
+    //Import de la fonction Click on Btn-Avis
+    addListenerAvis();
 
 }
 
