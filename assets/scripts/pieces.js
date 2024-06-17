@@ -1,17 +1,32 @@
 // const productsFile = "../api-http/db.json";
 const productsFile = "../../pieces-autos.json";
 
-const fetchDatas = await fetch(productsFile);
-const datas = await fetchDatas.json();
+//Fetching Datas
+async function getDatas(dataFile){
 
-// let dataSet = datas.pieces;
-let dataSet = datas;
+    const response = await fetch(dataFile);
+    const datas = await response.json();
 
-console.log(dataSet)
+    return datas;
+}
+
+//Create Data Array
+let dataSet=[];
+
+//Get Data Fecth in DataSet to display datas
+async function initProducts(dataFile) {
+    
+    dataSet = await getDatas(dataFile);
 
     //Display All of Datas
     displayProductDatas(dataSet);
 
+    return dataSet;
+
+} 
+
+    initProducts(productsFile);
+  
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');
       orderedByPrice.addEventListener('click',(e)=> {
@@ -24,6 +39,8 @@ console.log(dataSet)
         //Get Data Filter Action
         const titleFilter = e.target.getAttribute('title');
         document.querySelector('.filter-name').textContent = `${titleFilter}`;
+
+        console.log(dataSet);
 
         //Display datas with function who ordered datas
         displayProductDatas(orderedPrice(dataSet));
@@ -183,6 +200,9 @@ filteredByRange.addEventListener('change',(e) =>{
     },{once:true});
 
 
+
+
+
  
 // FUNCTIONS
 // Get Set Display Datas Products
@@ -200,6 +220,7 @@ async function displayProductDatas(dataElement) {
         let dataDesc = document.createElement('p');
         let dataDispo = document.createElement('div');
         let dataCat = document.createElement('span');
+        let dataAvis = document.createElement('button');
     
         //Afficher les infos des objects dans le tableau retour de données
         const objectData = dataElement[data];
@@ -211,7 +232,6 @@ async function displayProductDatas(dataElement) {
         dataName.classList.add('product_name');
         dataName.textContent = `${objectData.nom}`;
         
-
         dataPrice.classList.add('product_price');
         dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
@@ -228,8 +248,11 @@ async function displayProductDatas(dataElement) {
         dataCat.classList.add('product_cat');
         dataCat.textContent = `${objectData.categorie ?? '❌ pas de catégorie'}`;
 
+        dataAvis.classList.add('btn');
+        dataAvis.textContent = `Afficher les avis`;
+
         // Push Datas in DOM
-        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo);
+        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo,dataAvis);
 
         //Push Global Datas
         document.querySelector('.displayed-datas').append(dataWrapper);
