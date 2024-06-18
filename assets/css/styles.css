@@ -226,6 +226,27 @@ header h1 {
 	text-align: center;
 }
 
+/* Form */
+.formulaire-avis{
+	--gap:1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap:var(--gap);
+	margin-block:1rem;
+	padding:.55rem;
+	transition: all .25s ease-in-out;
+	border-radius: var(--radius);
+}
+
+.formulaire-avis:focus-within {
+	background:var(--black-color);
+}
+
+.formulaire-avis:focus-within > label, input {
+	color:var(--white-color);
+}
 
 
 /* Liste Fiches */
