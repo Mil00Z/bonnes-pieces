@@ -225,7 +225,7 @@ async function displayProductDatas(dataElement) {
         let dataDispo = document.createElement('div');
         let dataCat = document.createElement('span');
         let dataAvisBtn = document.createElement('button');
-        let dataAvis = document.createElement('aside');
+       
     
         //Afficher les infos des objects dans le tableau retour de données
         const objectData = dataElement[data];
@@ -256,10 +256,10 @@ async function displayProductDatas(dataElement) {
         dataAvisBtn.classList.add('btn','btn-avis');
         dataAvisBtn.textContent = `Afficher les avis`;
 
-        dataAvis.classList.add('product_avis');
-
+        // dataAvis.classList.add('product_avis');
+    
         // Push Datas in DOM
-        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo,dataAvisBtn,dataAvis);
+        dataWrapper.append(dataCat,dataImg,dataName,dataDesc,dataPrice,dataDispo,dataAvisBtn);
 
         //Push Global Datas
         document.querySelector('.displayed-datas').append(dataWrapper);

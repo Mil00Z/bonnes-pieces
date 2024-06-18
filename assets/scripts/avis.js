@@ -8,28 +8,38 @@ export function addListenerAvis() {
     
                 const productId = productsAvis[i].parentElement.getAttribute('data-id') ;
 
+                // Create Ressrouce Datas Url
                 let newDatasUrl = `http://localhost:8081/pieces/${productId}/avis`;
 
+                // Get Datas target by ID
                 const response = await fetch(newDatasUrl);
+                const avisList = await response.json();
 
-                const avis = await response.json();
+                console.log('ID of product ---  Name of Product =>', `${productId} < --- > ${productsAvis[i].parentElement.querySelector('.product_name').textContent}` );
 
-                console.log(avis[3]);
+                for (let i = 0; i < avisList.length; i ++) {
 
-                // console.log('ID of product ---  Name of Product =>', `${productId} < --- > ${productsAvis[i].parentElement.querySelector('.product_name').textContent}` );
+                    // Get Product Card
+                    let dataWrapper = e.target.closest('.product');
 
-                for (let i = 0; i < avis.length; i ++) {
+                    // Create HTML Slot for Avis
+                    let dataAvis = document.createElement('p');
+                    dataAvis.classList.add('product_avis');
+                    dataAvis.dataset.avisId = `${avisList[i].id}`;
 
-                    document.querySelector('.product_avis').textContent += `
-                    Qui: ${avis[i].utilisateur}
-                    Quoi: ${avis[i].commentaire}
-                    Note ${avis[i].nbEtoiles}`;
+                    dataAvis.innerHTML += `
+                    <span> Qui:  ${avisList[i].utilisateur ?? "Unknown Person"}</span><br>
+                    <span>Quoi:  ${avisList[i].commentaire ?? "No comment"}</span><br>
+                    <span>Note:  ${avisList[i].nbEtoiles ?? "No Stars"}</span>`;
+
+                    dataWrapper.append(dataAvis);
+ 
                 }
 
                 // Open new Tab with Good Targeted URL
-                // window.open(newDatasUrl);
-
-            });
+                window.open(newDatasUrl);
+                
+            },{once:true});
     
         }
 }
