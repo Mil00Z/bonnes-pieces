@@ -7,10 +7,18 @@ const productsFile = 'http://localhost:8081/pieces';
 //Fetching Datas
 async function getDatas(dataFile){
 
-    const response = await fetch(dataFile);
-    const datas = await response.json();
+    try{
 
-    return datas;
+        const response = await fetch(dataFile);
+        const datas = await response.json();
+        
+        return datas;
+
+    } catch (error) {
+
+        alert('No fetched Data');
+        
+    }
 }
 
 //Create Data Array
@@ -476,5 +484,6 @@ function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
         document.querySelector('.filter-name').append(productListAvailable);
 
 }
+
 
 

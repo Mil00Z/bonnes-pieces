@@ -38,8 +38,22 @@ export function addListenerAvis() {
 
                 // Open new Tab with Good Targeted URL
                 window.open(newDatasUrl);
-                
+
             },{once:true});
     
         }
 }
+
+const fetchParems = {
+    method:"post",
+    body : {
+        "Commentaire" : "Zeeeebi"
+    },
+    headers: {
+        'content-type':'application/json'
+    }
+}
+
+console.log(fetchParems);
+
+
