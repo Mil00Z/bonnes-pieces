@@ -1,4 +1,4 @@
-import { addListenerAvis } from "./avis.js";
+import { addListenerAvis, addListenerSendAvis } from "./avis.js";
 
 
 // const productsFile = "../../pieces-autos.json";
@@ -21,6 +21,7 @@ async function getDatas(dataFile){
     }
 }
 
+
 //Create Data Array
 let dataSet=[];
 
@@ -38,6 +39,10 @@ async function initProducts(dataFile) {
 } 
 
 initProducts(productsFile);
+
+
+//Put Avis on the way
+addListenerAvis()
   
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');

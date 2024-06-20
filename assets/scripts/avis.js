@@ -44,16 +44,45 @@ export function addListenerAvis() {
         }
 }
 
-const fetchParems = {
-    method:"post",
-    body : {
-        "Commentaire" : "Zeeeebi"
-    },
-    headers: {
-        'content-type':'application/json'
-    }
+
+
+const avis = {
+
+    pieceId :document.querySelector('[name=piece-id]').value
+
 }
 
-console.log(fetchParems);
+export function addListenerSendAvis() {
 
+        const avisForm = document.querySelector("#the-form");
+
+        avisForm.addEventListener('submit',(e) =>{
+
+            e.preventDefault();
+            document.body.querySelector('.displayed-datas').innerHTML='';
+
+            const avis = {
+                pieceId: parseInt(document.querySelector('[name=piece-id]').value) ?? null,
+                utilisateur : document.querySelector('[name=utilisateur]').value ?? "Unknown",
+                commentaire: document.querySelector('[name=commentaire]').value ?? "pas de commentaires", 
+                nbEtoiles: parseInt(document.querySelector('[name=starring]').value) ?? null, 
+            }
+
+            let bodyUtile = JSON.stringify(avis);
+
+            const fetchParams = {
+                method:"post",
+                body : bodyUtile,
+                headers: {
+                    'content-type':'application/json'
+                }
+            }
+
+            console.log(fetchParams);
+    
+          
+        });
+}
+
+window.addEventListener('load',addListenerSendAvis);
 

@@ -244,8 +244,15 @@ header h1 {
 	background:var(--black-color);
 }
 
-.formulaire-avis:focus-within > label, input {
-	color:var(--white-color);
+.formulaire-avis:focus-within > label, 
+.formulaire-avis:focus-within > input,
+.formulaire-avis:focus-within > textarea {
+	color:var(--main-color);
+}
+
+.formulaire-avis:focus-within > input,
+.formulaire-avis:focus-within > textarea {
+	font-weight:bold;
 }
 
 
