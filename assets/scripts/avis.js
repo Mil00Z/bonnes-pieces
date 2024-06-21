@@ -45,13 +45,6 @@ export function addListenerAvis() {
 }
 
 
-
-const avis = {
-
-    pieceId :document.querySelector('[name=piece-id]').value
-
-}
-
 export function addListenerSendAvis() {
 
         const avisForm = document.querySelector("#the-form");
@@ -80,9 +73,10 @@ export function addListenerSendAvis() {
 
             console.log(fetchParams);
     
-          
         });
 }
 
 window.addEventListener('load',addListenerSendAvis);
+
+
 

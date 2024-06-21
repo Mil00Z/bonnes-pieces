@@ -1,8 +1,8 @@
 import { addListenerAvis, addListenerSendAvis } from "./avis.js";
 
-
+const productType = 'pieces';
 // const productsFile = "../../pieces-autos.json";
-const productsFile = 'http://localhost:8081/pieces';
+const productsFile = `http://localhost:8081/${productType}`;
 
 //Fetching Datas
 async function getDatas(dataFile){
@@ -11,7 +11,11 @@ async function getDatas(dataFile){
 
         const response = await fetch(dataFile);
         const datas = await response.json();
-        
+
+        const valueDatas = JSON.stringify(datas);
+
+        window.localStorage.setItem(`${productType}`, valueDatas);
+
         return datas;
 
     } catch (error) {
@@ -32,18 +36,29 @@ async function initProducts(dataFile) {
 
     //Display All of Datas
     displayProductDatas(dataSet);
-    // displayProductDatas(dataSet.pieces);
 
     return dataSet;
-
 } 
 
-initProducts(productsFile);
 
+let availableProducts = window.localStorage.getItem(`${productType}`);
 
-//Put Avis on the way
-addListenerAvis()
-  
+if (availableProducts === null){
+
+    initProducts(productsFile);
+    alert('no localStorage');
+
+} else {
+    
+    alert('LocalStorage');
+    dataSet = JSON.parse(availableProducts);
+
+    displayProductDatas(dataSet);
+}
+
+     //Put Avis on the way
+     addListenerAvis();
+
     //Ordered BY Price
       const orderedByPrice = document.querySelector('.btn-order-price');
       orderedByPrice.addEventListener('click',(e)=> {
