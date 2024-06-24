@@ -1,4 +1,4 @@
-import { addListenerAvis, addListenerSendAvis } from "./avis.js";
+import { addListenerAvis, addListenerSendAvis,displayAvis,updateAvis } from "./avis.js";
 
 const productType = 'pieces';
 // const productsFile = "../../pieces-autos.json";
@@ -13,7 +13,6 @@ async function getDatas(dataFile){
         const datas = await response.json();
 
         const valueDatas = JSON.stringify(datas);
-
         window.localStorage.setItem(`${productType}`, valueDatas);
 
         return datas;
@@ -59,12 +58,11 @@ if (availableProducts === null){
     displayProductDatas(dataSet);
 }
 
-
+//Clear Datas Storage
 const updateProduct = document.querySelector('.btn-maj');
 updateProducts(dataSet,updateProduct);
 
-//Put Avis on the way
-    addListenerAvis();
+
 
 //Ordered BY Price
     const orderedByPrice = document.querySelector('.btn-order-price');
@@ -302,7 +300,6 @@ async function displayProductDatas(dataElement) {
 
     //Import de la fonction Click on Btn-Avis
     addListenerAvis();
-
 }
 
 // Funny Display of Datas on DOM
@@ -523,6 +520,7 @@ function updateProducts(ArrayOfData,trigger) {
 
 
 }
+
 
 
 

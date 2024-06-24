@@ -1,47 +1,50 @@
 export function addListenerAvis() {
 
-    const productsAvis = document.querySelectorAll('.btn-avis');
+    const btnAvis = document.querySelectorAll('.btn-avis');
 
-    for (let i=0; i < productsAvis.length; i++) {
+    const productType = 'avis';
 
-            productsAvis[i].addEventListener('click', async function (e){
+    for (let i=0; i < btnAvis.length; i++) {
+
+        btnAvis[i].addEventListener('click', async function (e){
     
-                const productId = productsAvis[i].parentElement.getAttribute('data-id') ;
+            const productId = btnAvis[i].parentElement.getAttribute('data-id') ;
 
-                // Create Ressrouce Datas Url
-                let newDatasUrl = `http://localhost:8081/pieces/${productId}/avis`;
+            // Create Ressource Datas Url
+            let newDatasUrl = `http://localhost:8081/pieces/${productId}/${productType}`;
 
-                // Get Datas target by ID
-                const response = await fetch(newDatasUrl);
-                const avisList = await response.json();
+            // Get Datas target by ID
+            const response = await fetch(newDatasUrl);
+            const avisList = await response.json();
 
-                console.log('ID of product ---  Name of Product =>', `${productId} < --- > ${productsAvis[i].parentElement.querySelector('.product_name').textContent}` );
+        
+            // Check Datas After Click Event
+            console.log('ID of product ---  Name of Product =>', `${productId} < --- > ${btnAvis[i].parentElement.querySelector('.product_name').textContent}` );
 
-                for (let i = 0; i < avisList.length; i ++) {
+            if (localStorage.getItem(`${productType} - ${productId}`) === null) {
 
-                    // Get Product Card
-                    let dataWrapper = e.target.closest('.product');
+                console.warn('No Avis LocalStorage Datas');
 
-                    // Create HTML Slot for Avis
-                    let dataAvis = document.createElement('p');
-                    dataAvis.classList.add('product_avis');
-                    dataAvis.dataset.avisId = `${avisList[i].id}`;
+                //Create LocalStorage Cloned Datas
+                localStorage.setItem(`${productType} - ${productId}`, JSON.stringify(avisList));
 
-                    dataAvis.innerHTML += `
-                    <span> Qui:  ${avisList[i].utilisateur ?? "Unknown Person"}</span><br>
-                    <span>Quoi:  ${avisList[i].commentaire ?? "No comment"}</span><br>
-                    <span>Note:  ${avisList[i].nbEtoiles ?? "No Stars"}</span>`;
+                displayAvis(avisList,e.target);
 
-                    dataWrapper.append(dataAvis);
- 
-                }
+            } else {
 
-                // Open new Tab with Good Targeted URL
-                window.open(newDatasUrl);
+                console.warn('Avis LocalStorage Datas');
 
-            },{once:true});
+                let getLocal = localStorage.getItem(`${productType} - ${productId}`);
+                displayAvis(JSON.parse(getLocal), e.target);
+
+            }
+
+            // Open new Tab with Good Targeted URL
+            window.open(newDatasUrl);
+
+        },{once:true});
     
-        }
+    }
 }
 
 
@@ -75,6 +78,43 @@ export function addListenerSendAvis() {
     
         });
 }
+
+export function displayAvis(listElement,targetElement) {
+
+    // Loop into Datas Product Type 'Avis'
+    for (let i = 0; i < listElement.length; i ++) {
+
+        // Get Product Card
+        let dataWrapper = targetElement.closest('.product');
+
+        // Create HTML Slot for Avis
+        let dataAvis = document.createElement('p');
+        dataAvis.classList.add('product_avis');
+        dataAvis.dataset.avisId = `${listElement[i].id}`;
+
+        dataAvis.innerHTML += `
+        <span> Qui:  ${listElement[i].utilisateur ?? "Unknown Person"}</span><br>
+        <span>Quoi:  ${listElement[i].commentaire ?? "No comment"}</span><br>
+        <span>Note:  ${listElement[i].nbEtoiles ?? "No Stars"}</span>`;
+
+        dataWrapper.append(dataAvis);
+
+    }
+
+}
+
+
+export function updateAvis(storageType,trigger) {
+
+    trigger.addEventListener('click',(e) => {
+
+        localStorage.removeItem(`${storageType} - ${productId}`);
+        // console.log(ArrayOfData);
+       
+    });
+
+}
+
 
 window.addEventListener('load',addListenerSendAvis);
 
