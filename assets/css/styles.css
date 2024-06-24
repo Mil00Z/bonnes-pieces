@@ -228,6 +228,13 @@ header h1 {
 
 /* Form */
 .formulaire-avis{
+	margin-block:1rem;
+	padding:.55rem;
+	transition: all .25s ease-in-out;
+	
+}
+
+.formulaire-avis > section {
 	--gap:1rem;
 	display: flex;
 	flex-direction: column;
@@ -235,23 +242,31 @@ header h1 {
 	align-items: center;
 	row-gap:var(--gap);
 	margin-block:1rem;
-	padding:.55rem;
-	transition: all .25s ease-in-out;
+	padding:1rem .55rem;
 	border-radius: var(--radius);
+	transition: all .25s ease-in-out;
 }
 
-.formulaire-avis:focus-within {
-	background:var(--black-color);
+.formulaire-avis:focus-within section:first-of-type {
+	background:var(--product-price-ok);
+}
+.formulaire-avis:focus-within section:last-of-type {
+	background:var(--product-available);
 }
 
-.formulaire-avis:focus-within > label, 
-.formulaire-avis:focus-within > input,
-.formulaire-avis:focus-within > textarea {
+.formulaire-avis:focus-within label, 
+.formulaire-avis:focus-within input,
+.formulaire-avis:focus-within textarea {
 	color:var(--main-color);
 }
 
-.formulaire-avis:focus-within > input,
-.formulaire-avis:focus-within > textarea {
+.formulaire-avis:focus-within h3 {
+	color:var(--white-color);
+}
+
+.formulaire-avis:focus-within label,
+.formulaire-avis:focus-within input,
+.formulaire-avis:focus-within textarea {
 	font-weight:bold;
 }
 
@@ -260,10 +275,12 @@ header h1 {
 
 .fiches {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
 	flex-wrap: wrap;
 	gap: var(--gap-common);
+	justify-content: inherit;
 }
 
 

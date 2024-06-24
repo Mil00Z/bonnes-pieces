@@ -44,33 +44,40 @@ async function initProducts(dataFile) {
 let availableProducts = window.localStorage.getItem(`${productType}`);
 
 if (availableProducts === null){
+    
+    console.log('NO localStorage');
 
     initProducts(productsFile);
-    alert('no localStorage');
+    
 
 } else {
     
-    alert('LocalStorage');
-    dataSet = JSON.parse(availableProducts);
+    console.log('IN LocalStorage');
 
+    dataSet = JSON.parse(availableProducts);
+   
     displayProductDatas(dataSet);
 }
 
-     //Put Avis on the way
-     addListenerAvis();
 
-    //Ordered BY Price
-      const orderedByPrice = document.querySelector('.btn-order-price');
-      orderedByPrice.addEventListener('click',(e)=> {
+const updateProduct = document.querySelector('.btn-maj');
+updateProducts(dataSet,updateProduct);
 
-        // orderedPrice(dataSet);
+//Put Avis on the way
+    addListenerAvis();
 
-        //Clear DOM Area of Datas
-        document.querySelector('.displayed-datas').innerHTML='';
+//Ordered BY Price
+    const orderedByPrice = document.querySelector('.btn-order-price');
+    orderedByPrice.addEventListener('click',(e)=> {
 
-        //Get Data Filter Action
-        const titleFilter = e.target.getAttribute('title');
-        document.querySelector('.filter-name').textContent = `${titleFilter}`;
+    // orderedPrice(dataSet);
+
+    //Clear DOM Area of Datas
+    document.querySelector('.displayed-datas').innerHTML='';
+
+    //Get Data Filter Action
+    const titleFilter = e.target.getAttribute('title');
+    document.querySelector('.filter-name').textContent = `${titleFilter}`;
 
         console.log(dataSet);
 
@@ -502,6 +509,18 @@ function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
 
         // Add Datas in DOM target Area
         document.querySelector('.filter-name').append(productListAvailable);
+
+}
+
+function updateProducts(ArrayOfData,trigger) {
+
+    trigger.addEventListener('click',(e) => {
+
+        localStorage.removeItem(`${productType}`);
+        console.log(ArrayOfData);
+        
+    });
+
 
 }
 
