@@ -276,7 +276,7 @@ async function displayProductDatas(dataElement) {
         dataPrice.textContent = `Prix: ${objectData.prix} ${objectData.prix < 35 ? "$" : "$$$"}`;
 
         dataImg.classList.add('product_img');
-        dataImg.setAttribute('src',`../assets/${objectData.image}`);
+        dataImg.setAttribute('src',`./assets/${objectData.image}`);
 
         dataDesc.classList.add('product_desc');
         dataDesc.textContent = `${objectData.description ?? " ❌ pas de description produit"}`;
