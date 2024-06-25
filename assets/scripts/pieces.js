@@ -1,8 +1,8 @@
-import { addListenerAvis } from "./avis.js";
+import { addListenerAvis, addListenerSendAvis,displayAvis,updateAvis} from "./avis.js";
 
-
+const productType = 'pieces';
 // const productsFile = "../../pieces-autos.json";
-const productsFile = 'http://localhost:8081/pieces';
+const productsFile = `http://localhost:8081/${productType}`;
 
 //Fetching Datas
 async function getDatas(dataFile){
@@ -11,7 +11,10 @@ async function getDatas(dataFile){
 
         const response = await fetch(dataFile);
         const datas = await response.json();
-        
+
+        const valueDatas = JSON.stringify(datas);
+        window.localStorage.setItem(`${productType}`, valueDatas);
+
         return datas;
 
     } catch (error) {
@@ -20,6 +23,7 @@ async function getDatas(dataFile){
         
     }
 }
+
 
 //Create Data Array
 let dataSet=[];
@@ -31,26 +35,49 @@ async function initProducts(dataFile) {
 
     //Display All of Datas
     displayProductDatas(dataSet);
-    // displayProductDatas(dataSet.pieces);
 
     return dataSet;
-
 } 
 
-initProducts(productsFile);
-  
-    //Ordered BY Price
-      const orderedByPrice = document.querySelector('.btn-order-price');
-      orderedByPrice.addEventListener('click',(e)=> {
 
-        // orderedPrice(dataSet);
+let availableProducts = window.localStorage.getItem(`${productType}`);
 
-        //Clear DOM Area of Datas
-        document.querySelector('.displayed-datas').innerHTML='';
+if (availableProducts === null){
+    
+    console.log('NO localStorage');
 
-        //Get Data Filter Action
-        const titleFilter = e.target.getAttribute('title');
-        document.querySelector('.filter-name').textContent = `${titleFilter}`;
+    initProducts(productsFile);
+    
+
+} else {
+    
+    console.log('IN LocalStorage');
+
+    dataSet = JSON.parse(availableProducts);
+   
+    displayProductDatas(dataSet);
+}
+
+//Clear Datas Storage
+const updateProduct = document.querySelector('.btn-maj');
+updateProducts(dataSet,updateProduct);
+
+// Action with Form Avis
+addListenerSendAvis();
+
+
+//Ordered BY Price
+    const orderedByPrice = document.querySelector('.btn-order-price');
+    orderedByPrice.addEventListener('click',(e)=> {
+
+    // orderedPrice(dataSet);
+
+    //Clear DOM Area of Datas
+    document.querySelector('.displayed-datas').innerHTML='';
+
+    //Get Data Filter Action
+    const titleFilter = e.target.getAttribute('title');
+    document.querySelector('.filter-name').textContent = `${titleFilter}`;
 
         console.log(dataSet);
 
@@ -275,7 +302,6 @@ async function displayProductDatas(dataElement) {
 
     //Import de la fonction Click on Btn-Avis
     addListenerAvis();
-
 }
 
 // Funny Display of Datas on DOM
@@ -484,6 +510,19 @@ function displayProductAvailable(subArrayName,SubArrayPrice,SubArrayDesc) {
         document.querySelector('.filter-name').append(productListAvailable);
 
 }
+
+function updateProducts(ArrayOfData,trigger) {
+
+    trigger.addEventListener('click',(e) => {
+
+        localStorage.removeItem(`${productType}`);
+        console.log(ArrayOfData);
+        
+    });
+
+
+}
+
 
 
 
