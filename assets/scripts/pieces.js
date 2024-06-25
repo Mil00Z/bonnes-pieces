@@ -237,12 +237,123 @@ filteredByRange.addEventListener('change',(e) =>{
     console.log('Data After Actions =>',productNameAvailable,productPriceAvailable,productDescAvailable);
 
     },{once:true});
+    
+
+
+//Data Visualisation
+const targetGraph = document.getElementById('graphique-avis').getContext('2d');
+const avisDatas = 'http://localhost:8081/avis';
+
+const avis = await fetch(`${avisDatas}`).then((avis) => avis.json());
+
+let nbComs = [0,0,0,0,0,0];
+
+let j = 0;
+
+for (let i=0; i < avis.length; i++){
+
+    // console.log(avis[i].nbEtoiles);
+
+    if (avis[i].nbEtoiles === 4) {
+
+        j++;
+
+        nbComs.splice(4,1,j);
+
+    } else if (avis[i].nbEtoiles === 3) {
+
+        j++;
+
+        nbComs.splice(3,1,j);
+
+    } else if (avis[i].nbEtoiles === 5) {
+
+        j++;
+
+        nbComs.splice(5,1,j);
+
+    } else if (avis[i].nbEtoiles === 1) {
+
+        j++;
+
+        nbComs.splice(1,1,j);
+
+    } else if (avis[i].nbEtoiles === 0) {
+
+        j++;
+
+        nbComs.splice(0,1,j);
+
+    }  else if (avis[i].nbEtoiles === 2) {
+
+        j++;
+
+        nbComs.splice(2,1,j);
+
+    } 
+    
+    else if (avis[i].nbEtoiles === null) {
+
+        console.log('Nombre Etoiles Non disponible');
+
+    }
+
+}
+
+
+let data = {
+    labels: [0,1,2,3,4,5].reverse(),
+    datasets: [{
+        label: "Nombre Étoiles attribuées",
+        data: [0, 14, 4, 15, 18, 25].reverse(),
+        backgroundColor: "#7451eb", 
+    }],
+ };
+
+let config = {
+        type: "bar",
+        data: data,
+        options: {
+           indexAxis: "y",
+        },
+    };
+
+
+const graphiqueAvis = new Chart(targetGraph, config);
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
 // FUNCTIONS
 // Get Set Display Datas Products
 async function displayProductDatas(dataElement) {

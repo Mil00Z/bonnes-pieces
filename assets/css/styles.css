@@ -64,29 +64,33 @@ header h1 {
 
 
 /* Filtres */
-.filtres {
+.side-actions {
 	display: flex;
 	flex-direction: column;
 	width: 45vw;
 	/* min-height: auto; */
 	height: fit-content;
-	/* margin: 8px; */
+	padding: 8px;
+}
+
+.filtres {
+	display: flex;
+	flex-direction: column;
 	padding: 8px;
 	row-gap:var(--gap-common);
 	border: var(--border-style-componant);
 	border-radius: var(--radius);
 	background-color:var(--white-color);
 	box-shadow: var(--filter-shadow);
-	
 }
 
-.filtres > h3 {
+/* .filtres > h3 {
 	margin-block:.35rem;
 	color:var(--main-color);
 	font-size:1.5rem;
 	font-weight: bold;
 	text-align: center;
-}
+} */
 
 .filter-name {
 	display: block;
@@ -102,6 +106,9 @@ header h1 {
 	border: var(--border-style-componant);
 	border-radius: var(--radius);	
 }
+.visualisation{
+	margin-top: 16px;
+}
 
 .list-filtered {
 	--border-color:var(--product-available);
@@ -116,6 +123,15 @@ header h1 {
 	padding:.45rem;
 	font-size:1rem;
 	font-weight: initial;
+} 
+
+.section-title {
+	margin-block:.35rem;
+	color:var(--main-color);
+	font-size:1.5rem;
+	font-weight: bold;
+	text-align: center;
+
 }
 
 

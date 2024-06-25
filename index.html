@@ -15,40 +15,53 @@
 
 		<main class="wrapper">
 			<!-- Menu de recherche -->
-			<aside class="filtres">
-				<h3>Filtres</h3>
-				<button class="btn btn-order-price" type="button" title="Produits avec Prix croissant">Trier par prix croissant</button>
-				<button class="btn btn-desorder-price" type="button" title="Produits avec Prix décroissant">Trier par prix décroissant</button>
-				<button class="btn btn-filter-price" type="button" title="Produits Prix Inférieurs à 35 euros">Filtrer les pièces abordables</button>
-				<button class="btn btn-get-desc" type="button" title="Produits avec Description">Filtrer les pièces avec description</button>
-				<button class="btn btn-get-stock" type="button" title="Produits avec Stock">Filtrer les pièces avec stock</button>
+			<aside class="side-actions">
 
-				<!-- <button class="btn btn-get-product-lower-price" type="button" title="prix croissant">Afficher les noms des pièces abordables</button>
-				<button class="btn btn-get-product-dispo" type="button" title="prix croissant">Afficher les noms des pièces disponibles</button> -->
+				<div class="filtres">
+					<h3 class="section-title">Filtres</h3>
+					<button class="btn btn-order-price" type="button" title="Produits avec Prix croissant">Trier par prix croissant</button>
+					<button class="btn btn-desorder-price" type="button" title="Produits avec Prix décroissant">Trier par prix décroissant</button>
+					<button class="btn btn-filter-price" type="button" title="Produits Prix Inférieurs à 35 euros">Filtrer les pièces abordables</button>
+					<button class="btn btn-get-desc" type="button" title="Produits avec Description">Filtrer les pièces avec description</button>
+					<button class="btn btn-get-stock" type="button" title="Produits avec Stock">Filtrer les pièces avec stock</button>
 
-				
-				<input type="range" name="ranged-price" class="btn btn-filter-range-price" id="ranged" min="0" max="50" step="5" title="Produit par tranche de prix">
-				
-				<form class="formulaire-avis" id="the-form">
-					<section>
-					<h3>Ajouter un avis</h3>
-					<label for="piece-id">Identifiant de la pièce :<br></label>
-					<input type="number" name="piece-id"><br>
-					<label for="utilisateur">Nom d'utilisateur :<br></label>
-					<input type="text" name="utilisateur"><br>
-					<label for="commentaire">Avis :<br></label>
-					<textarea name="commentaire"></textarea>
-					<label for="starring">Note du produit<br></label>
-					<input type="number" name="starring" min="0" max="5"><br>
-					<button class="btn btn-send">Envoyer</button>
-					</section>
+					<!-- <button class="btn btn-get-product-lower-price" type="button" title="prix croissant">Afficher les noms des pièces abordables</button>
+					<button class="btn btn-get-product-dispo" type="button" title="prix croissant">Afficher les noms des pièces disponibles</button> -->
+
 					
-					<section>
-						<h3>Données</h3>
-						<button class="btn btn-maj">Mettre à jour les pièces</button>
-					</section>
+					<input type="range" name="ranged-price" class="btn btn-filter-range-price" id="ranged" min="0" max="50" step="5" title="Produit par tranche de prix">
+					
+					<form class="formulaire-avis" id="the-form">
+						<section>
+						<h3 class="section-title">Ajouter un avis</h3>
+						<label for="piece-id">Identifiant de la pièce :<br></label>
+						<input type="number" name="piece-id"><br>
+						<label for="utilisateur">Nom d'utilisateur :<br></label>
+						<input type="text" name="utilisateur"><br>
+						<label for="commentaire">Avis :<br></label>
+						<textarea name="commentaire"></textarea>
+						<label for="starring">Note du produit<br></label>
+						<input type="number" name="starring" min="0" max="5"><br>
+						<button class="btn btn-send">Envoyer</button>
+						</section>
+						
+						<section>
+							<h3 class="section-title">Données</h3>
+							<button class="btn btn-maj">Mettre à jour les pièces</button>
+						</section>
 
-				</form>
+					</form>
+
+				</div>
+
+				<div class="visualisation">
+
+					<h3 class="section-title">Aperçu des avis</h3>
+					<canvas id="graphique-avis" width="300" height="300"></canvas>
+					<canvas id="myChart" width="400" height="400"></canvas>
+
+				</div>
+				
 			</aside>
 
 			<!-- Fiches produits -->
@@ -56,9 +69,11 @@
 				<div class="filter-name">Tout les produits</div>
 				<div class="displayed-datas"></div>
 			</section>
+
 		</main>
 		
 	</body>
 
 	<script type="module" src="./assets/scripts/pieces.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 </html>
