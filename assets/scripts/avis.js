@@ -50,13 +50,13 @@ export function addListenerAvis() {
 
 export function addListenerSendAvis() {
 
+        const postDataUrl = 'http://localhost:8081/avis';
+
         const avisForm = document.querySelector("#the-form");
-
         avisForm.addEventListener('submit',(e) =>{
-
+            
             e.preventDefault();
-            document.body.querySelector('.displayed-datas').innerHTML='';
-
+        
             const avis = {
                 pieceId: parseInt(document.querySelector('[name=piece-id]').value) ?? null,
                 utilisateur : document.querySelector('[name=utilisateur]').value ?? "Unknown",
@@ -66,6 +66,7 @@ export function addListenerSendAvis() {
 
             let bodyUtile = JSON.stringify(avis);
 
+
             const fetchParams = {
                 method:"post",
                 body : bodyUtile,
@@ -74,7 +75,9 @@ export function addListenerSendAvis() {
                 }
             }
 
-            console.log(fetchParams);
+            
+            fetch(`${postDataUrl}`,fetchParams);
+            // console.log(fetchParams);
     
         });
 }

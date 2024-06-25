@@ -1,4 +1,4 @@
-import { addListenerAvis, addListenerSendAvis,displayAvis,updateAvis } from "./avis.js";
+import { addListenerAvis, addListenerSendAvis,displayAvis,updateAvis} from "./avis.js";
 
 const productType = 'pieces';
 // const productsFile = "../../pieces-autos.json";
@@ -62,6 +62,8 @@ if (availableProducts === null){
 const updateProduct = document.querySelector('.btn-maj');
 updateProducts(dataSet,updateProduct);
 
+// Action with Form Avis
+addListenerSendAvis();
 
 
 //Ordered BY Price
