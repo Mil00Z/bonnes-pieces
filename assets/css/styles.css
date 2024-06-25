@@ -203,9 +203,18 @@ header h1 {
 	position: relative;
 	border: var(--border-style-componant);
 	background: var(--white-color);
-	color: var(--main-color);
+	color: var(--black-color);
+	font-size:.90rem;
 	font-weight: bold;
 	border-radius: var(--radius);
+}
+
+.product_avis:nth-of-type(odd) {
+	background:var(--product-categorie);
+}
+
+.product_avis:nth-of-type(even) {
+	background:var(--product-available);
 }
 
 .product_avis::after{
