@@ -110,6 +110,19 @@ header h1 {
 	margin-top: 16px;
 }
 
+.infos-staring {
+	margin-block:1rem;
+	text-align: center;
+}
+
+.infos-staring > strong:first-of-type{
+	color:var(--product-categorie);
+}
+
+.infos-staring > strong:last-of-type{
+	color:var(--black-color);
+}
+
 .list-filtered {
 	--border-color:var(--product-available);
 	display: flex;

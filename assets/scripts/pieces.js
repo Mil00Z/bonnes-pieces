@@ -249,6 +249,12 @@ const avis = await fetch(`${avisDatas}`).then((avis) => avis.json());
 let nbComs = [0,0,0,0,0,0];
 
 let j = 0;
+let k = 0;
+let l = 0;
+let m = 0;
+let n = 0;
+let p = 0;
+
 
 for (let i=0; i < avis.length; i++){
 
@@ -262,33 +268,33 @@ for (let i=0; i < avis.length; i++){
 
     } else if (avis[i].nbEtoiles === 3) {
 
-        j++;
+        k++;
 
-        nbComs.splice(3,1,j);
+        nbComs.splice(3,1,k);
 
     } else if (avis[i].nbEtoiles === 5) {
 
-        j++;
+        l++;
 
-        nbComs.splice(5,1,j);
+        nbComs.splice(5,1,l);
 
     } else if (avis[i].nbEtoiles === 1) {
 
-        j++;
+        m++;
 
-        nbComs.splice(1,1,j);
+        nbComs.splice(1,1,m);
 
     } else if (avis[i].nbEtoiles === 0) {
 
-        j++;
+        n++;
 
-        nbComs.splice(0,1,j);
+        nbComs.splice(0,1,n);
 
     }  else if (avis[i].nbEtoiles === 2) {
 
-        j++;
+        p++;
 
-        nbComs.splice(2,1,j);
+        nbComs.splice(2,1,p);
 
     } 
     
@@ -300,12 +306,29 @@ for (let i=0; i < avis.length; i++){
 
 }
 
+// Testing if Datas are Correct 
 
+var sumEtoiles = nbComs.reduce((accum,current) => {
+        return accum + current ;
+},0);
+
+
+if (nbComs.length === sumEtoiles) {
+
+    console.log ('All Avis have Nbre Etoiles');
+
+} else {
+    console.warn(`'some Avis dont have Nbr Etoiles`);
+
+    console.log(`Nb Total Etoiles: ${sumEtoiles} //`,`Nb Avis : ${avis.length}`);
+}
+
+// Update Chart Object
 let data = {
     labels: [0,1,2,3,4,5].reverse(),
     datasets: [{
         label: "Nombre Étoiles attribuées",
-        data: [0, 14, 4, 15, 18, 25].reverse(),
+        data: nbComs.reverse(),
         backgroundColor: "#7451eb", 
     }],
  };
@@ -320,6 +343,14 @@ let config = {
 
 
 const graphiqueAvis = new Chart(targetGraph, config);
+
+let infosAvis = document.createElement('p');
+infosAvis.classList.add('infos-staring');
+
+infosAvis.innerHTML = ` <strong>${sumEtoiles}</strong> notes laissées sur <strong>${avis.length} </strong> avis ✨`;
+document.querySelector('.visualisation').append(infosAvis);
+
+
 
 
 
